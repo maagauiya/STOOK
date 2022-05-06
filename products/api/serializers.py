@@ -1,23 +1,42 @@
-from nbformat import read
 from rest_framework import serializers
-from products.models import Product, ProductComment
-from users.models import Supplier
+from products.models import Product, ProductComment, Category
+from users.api.serializers import UserProfileSerializer
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    supplier = serializers.ReadOnlyField("supplier.name")
-    productComment = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    category = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+   # productComment = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+   # category = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    user = serializers.SerializerMethodField(read_only=True)
+    category = CategorySerializer(many=True, read_only=True)
     
     class Meta:
         model = Product
         fields = '__all__'
         
+    def get_user(self, obj):
+        user = obj.user.userprofile
+        serializer = UserProfileSerializer(user, many=True)
+        return serializer.data
+        
         
 class ProductCommentSerializer(serializers.ModelSerializer):
-    product = serializers.ReadOnlyField('product.name')
-    user = serializers.ReadOnlyField('user.username')
+   # product = serializers.ReadOnlyField('product.name')
+   # user = serializers.ReadOnlyField('user.username')
+    user = serializers.SerializerMethodField(read_only=True)
     
     class Meta:
         model = ProductComment
         fields = '__all__'
+        
+    def get_user(self, obj):
+        user = obj.user.userprofile
+        serializer = UserProfileSerializer(user, many=True)
+        return serializer.data
+        
+        

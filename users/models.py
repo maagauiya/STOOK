@@ -17,14 +17,12 @@ class UserProfile(models.Model):
     is_admin = models.BooleanField(default=False)
     is_moderator = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
+    is_supplier = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.username
     
-class Supplier(UserProfile):
-    supplier_name = models.CharField(max_length=300)
-    is_blocked = models.BooleanField(default=False)
     
 
     
