@@ -1,0 +1,498 @@
+/*=================================================================================*/
+/*=================================================================================*/
+/*=================================================================================*/
+/*==========================||---------------------------||========================*/
+/*==========================|| DESIGNED BY  HOSSAM HILAL ||========================*/
+/*==========================||---------------------------||========================*/
+/*====================================||------||===================================*/
+/*====================================|| 2018 ||===================================*/
+/*====================================||------||===================================*/
+/*=================================================================================*/
+/*=================================================================================*/
+
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+.list-view .product-card .data,
+.article-page p,
+.article-page h4,
+.article-writer .data h5,
+.related-articels h2,
+.comments h2 {
+    text-align: right;
+}
+
+.right-text,
+.bootom-header .cotents .block-contnet .view-more,
+.question-box .icon,
+.question-box .author,
+.seller_modal .close,
+.locator-search-options .buttons {
+    text-align: left;
+}
+
+.rating>label,
+.main-side .compare-products h2 span,
+.copy-right img,
+.middle-header .cart-dropdown .counts .close {
+    float: left;
+}
+
+.header-top .links-service a {
+    border-left: 0;
+    border-right: 1px solid #999;
+}
+
+.header-top .links-service li:first-child a {
+    padding-left: 15px;
+    border-right: 0;
+}
+
+.header-top .user-links {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.header-top .result-data {
+    border-left: 1px solid #999;
+    padding-left: 7px;
+    border-right: 0;
+    padding-right: 0;
+}
+
+.header-top .form-hover .result-data {
+    padding-left: 13px;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.header-top .user-links li:last-child a {
+    padding-right: 10px;
+}
+
+.header-top .user-links>.main-li>.result-data {
+    direction: ltr;
+}
+
+.header-top .user-links>.main-li>.result-data img {
+    margin: 0 5px 0 3px;
+}
+
+.header-top .user-links>.main-li>ul li img {
+    float: left;
+    margin: 9px 6px 0 0;
+}
+
+.middle-header .cart-header {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.middle-header .filter-box {
+    border-right: 0;
+}
+
+.middle-header .search-box input {
+    border-left: 1px solid #dedede;
+}
+
+.middle-header .cart-dropdown .item-box img {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.middle-header .cart-dropdown::before {
+    left: 25px;
+    right: auto;
+}
+
+.middle-header .cart-dropdown::after {
+    left: 26px;
+    right: auto;
+}
+
+.middle-header .search-categ {
+    left: auto;
+    right: 31px;
+}
+
+.middle-header .search-categ ul li {
+    background: url(../images/treeview-default-line-2.gif) 0 0 no-repeat;
+    padding: 0px 16px 3px 0;
+    background-position: right;
+    position: relative;
+}
+
+.middle-header .search-categ ul p .plus::before {
+    left: auto;
+    right: .5px;
+}
+
+.middle-header .search-categ ul p .plus::after {
+    left: auto;
+}
+
+.middle-header .search-categ ul li::after {
+    content: "";
+    width: 6px;
+    height: 1px;
+    border-bottom: 1px dashed #ced4da;
+    display: block;
+    position: absolute;
+    top: 9px;
+    right: 9px;
+}
+
+.middle-header .search-categ .expand {
+    padding: 0 0 0 10px;
+    border-right: 0;
+    border-left: 2px solid #999999;
+}
+
+.middle-header .search-categ .colapse {
+    padding: 0 10px 0 0;
+}
+
+.header-top .hover-content {
+    left: 0;
+    right: auto;
+}
+
+.middle-header .cart-dropdown {
+    left: 15px;
+    right: auto;
+}
+
+.bootom-header .site-menu .main-list-li .cat-icon {
+    margin-right: 0;
+    margin-left: 11px;
+}
+
+.bootom-header .site-menu .main-list-li .right-icon {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.bootom-header .btn-menu .btn {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.bootom-header .site-menu .main-list-li i {
+    margin-left: 0;
+    margin-right: auto;
+    transform: rotate(180deg);
+}
+
+.header-top .form-hover .result-data i {
+    float: right;
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+.bootom-header .menue-content {
+    right: 150%;
+    left: auto;
+}
+
+.bootom-header .main-list-li:hover .menue-content {
+    right: 100%;
+    left: auto;
+}
+
+.bootom-header .cat-popup-list {
+    right: 150%;
+    left: auto;
+}
+
+.bootom-header .main-list-li:hover .cat-popup-list,
+.bootom-header .cat-popup-list li:hover .itemsubmenu {
+    right: 100%;
+    left: auto;
+    margin-left: 0;
+    margin-right: 1px;
+}
+
+.bootom-header .cat-popup-list a {
+    padding: 0 30px 0 15px;
+}
+
+.bootom-header .cat-popup-list a::before {
+    right: 15px;
+    left: auto;
+}
+
+.bootom-header .site-menu .sub-internal-menu li::before {
+    right: -15px;
+    left: auto;
+}
+
+.bootom-header .side-menue li:before {
+    left: auto;
+    right: 0;
+}
+
+.bootom-header .side-menue li {
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+.products-section h2::after {
+    left: auto;
+    right: 0;
+}
+
+.products-section .tablist-owl .owl-nav {
+    left: -55px;
+    right: auto;
+}
+
+.footer .info-box .icon {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+.product-details li {
+    padding-right: 12px;
+    padding-left: 0;
+}
+
+.product-details li::before {
+    right: 0;
+    left: auto;
+}
+
+.product-details .counter {
+    margin-right: 0;
+    margin-left: 20px;
+}
+
+.product-details .counter .plus {
+    left: 0;
+    right: auto;
+}
+
+.product-details .counter .minus {
+    left: 0;
+    right: auto;
+}
+
+.product-details .btn-link i {
+    float: right;
+    margin: 9px 0 0 10px;
+}
+
+.ship-box .data {
+    padding-left: 0;
+    padding-right: 10px;
+}
+
+.product-details p label {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+@media (min-width:1200px) {
+    .internal-main-content .col-lg-9 {
+        padding-left: 0px;
+        padding-right: 30px;
+    }
+}
+
+.main-side .profile-links li i {
+    margin-right: 0;
+    float: right;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.main-side .featured-brands .data {
+    margin-right: 15px;
+    margin-left: 0;
+}
+
+.form-check {
+    padding-left: 0;
+    padding-right: 20px;
+}
+
+.form-check-input {
+    margin-right: -19px;
+    margin-left: 0;
+}
+
+.profile-content .filter-head ul {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.whislist-product .action-link:first-of-type {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.brands-page .brands-search .btn {
+    right: auto;
+    left: 0;
+}
+
+.main-side .side-block .post .data {
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+.article-page ul {
+    width: fit-content;
+    direction: rtl;
+    clear: both;
+}
+
+.article-page ul i {
+    float: right;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.article-writer .data {
+    padding-right: 20px;
+    padding-left: 0;
+    text-align: right;
+}
+
+.comments .data {
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+.main-side .side-block .post li i {
+    float: right;
+    height: 16px;
+    line-height: 16px;
+    margin-left: 5px;
+}
+
+.main-side .side-block .post li {
+    text-align: right;
+}
+
+.pagination-box .page-link.next i {
+    transform: rotate(180deg);
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.blog-box ul {
+    width: fit-content;
+    direction: rtl;
+}
+
+.blog-box ul i {
+    float: right;
+    line-height: 18px;
+    margin-left: 5px;
+}
+
+.article-page ul li {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.comments h5 i {
+    float: right;
+    line-height: 15px;
+    margin-left: 5px;
+}
+
+.blog-box ul li {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.brand-page .company-info .data {
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+.cart-page .cart-prodcts-menu .cart-item .delete-cart-prod {
+    left: 15px;
+    right: auto;
+}
+
+.cart-page .cart-gift .buttons {
+    text-align: right;
+    direction: ltr;
+}
+
+.log-wrapper .back {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+.log-wrapper .col-12:first-of-type {
+    border-left: 1px solid #ddd;
+    border-right: 0;
+}
+
+@media screen and (max-width:767px) {
+    .log-wrapper .col-12:first-of-type {
+        border-right: 0;
+        border-left: 0;
+    }
+}
+
+.log-wrapper .head-box {
+    padding-right: 15px;
+}
+
+.last-marketplace .store .information .data {
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+.product-details .block-butons .other-action i {
+    margin: 0;
+}
+
+.product-page .details-wrapper .rating {
+    margin-left: auto;
+    margin-right: 0;
+    padding: 0;
+}
+
+.seller-about-side li i,
+.seller-info li i {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.filter-item-body .result-numbers {
+    flex-direction: row-reverse;
+}
+
+.product-card .discount {
+    left: auto;
+    right: -1px;
+}
+
+.list-view .product-card .overlay {
+    left: 15px;
+    right: auto;
+}
+
+.list-view .product-card .data ul {
+    margin-right: 0;
+}
+
+.product-card .price .old {
+    margin: 0 0 0 10px;
+}
+
+.list-view .product-card .add-to-cart {
+    margin-right: 0;
+}
