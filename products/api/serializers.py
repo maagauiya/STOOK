@@ -13,7 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
    # productComment = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
    # category = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
-    category = CategorySerializer(many=True, read_only=True)
+    category = CategorySerializer(many=False)
     
     class Meta:
         model = Product
@@ -21,8 +21,8 @@ class ProductSerializer(serializers.ModelSerializer):
         
     def get_user(self, obj):
         user = obj.user.userprofile
-        serializer = UserProfileSerializer(user, many=True)
-        return serializer.data
+        serializer = UserProfileSerializer(user, many=False)
+        return serializer.data['username']
         
         
 class ProductCommentSerializer(serializers.ModelSerializer):

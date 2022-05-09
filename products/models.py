@@ -12,10 +12,10 @@ class Category(models.Model):
 class Product(models.Model):
    # supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category, blank=True, related_name='categories')
+    category = models.ForeignKey(Category, blank=True, null=True, related_name='categories', on_delete=models.SET_NULL)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=50, blank=True, null=True)
-    image = models.ImageField()
+    image = models.ImageField(blank=True, null=True)
     price = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
