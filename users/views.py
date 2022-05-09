@@ -7,4 +7,4 @@ from django.shortcuts import render
 
 def signin(request):
 
-    return HttpResponse("asdas")
+    return render(request,'users/signin.html')
