@@ -148,9 +148,6 @@
                                 <span class="result-data">  My Profile </span> 	&nbsp;
                                 <form id="myForm"  method="POST" style = "display:inline" >
                                     {% csrf_token %}
-                                    
-                                    
-
                                     <input type="hidden" value="obj" name="logout">
                                     <a id="sub" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Exit</a>
                                 </form>
@@ -1061,7 +1058,7 @@
                                             <li> <a href="blog.html" >Blog</a> </li>
                                             <li> <a href="faq.html" >FAQ</a> </li>
                                             <li> <a href="store-locator.html" >Store Locator</a> </li>
-                                            <li> <a href="account.html"> <i class="icofont-user"></i> Your Account	</a> </li>
+                                            <li> <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Your Account	</a> </li>
                                             <li> <a href="orders.html"> <i class="icofont-bag"></i>  Your Order	</a> </li>
                                             <li> <a href="Wishlist.html" class="Wishlist"> <i class="icofont-heart"></i> Your Wishlist </a> </li>
                                             <li> <a href="product-review.html"> <i class="icofont-eye-alt"></i>  Your Product Reviews  </a> </li>
@@ -1694,26 +1691,26 @@
                             <ul>
                                
                                 <li class="active">
-                                    <a href="account.html"> <i class="icofont-user"></i> Account Dashboard </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Account Dashboard </a>
                                 </li>
                                 <li>
-                                    <a href="account-info.html"> <i class="icofont-info"></i>  Account Information </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-info"></i>  Account Information </a>
                                 </li>
                                 <li>
-                                    <a href="account-address.html"> <i class="icofont-paper-plane"></i> Address Book  </a>
+                                    <a href="{% url 'account_address' %}"> <i class="icofont-paper-plane"></i> Address Book  </a>
                                 </li>
                                 <li>
-                                    <a href="account-orders.html"> <i class="icofont-numbered"></i> My Orders </a>
+                                    <a href="{% url 'account_orders' %}"> <i class="icofont-numbered"></i> My Orders </a>
                                 </li>
                              
                                
                                 <li>
-                                    <a href="account-news.html"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
+                                    <a href="{% url 'account_news' %}"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
                                 </li>
                         
                                
                                 <li>
-                                    <a href="account-wishlist.html"> <i class="icofont-cart"></i> Cart </a>
+                                    <a href="{% url 'account_wishlsit' %}"> <i class="icofont-cart"></i> Cart </a>
                                 </li>
                             </ul>
                         </div>
@@ -1737,8 +1734,8 @@
                                         <p> {{email}} </p>
                                     </div>
                                     <div class="info-footer">
-                                        <a href="account-info.html" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
-                                        <a href="account-info.html" class="btn btn-orange"> Change Password  </a>
+                                        <a href="{% url 'account_info' %}" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
+                                        <a href="{% url 'account_info' %}" class="btn btn-orange"> Change Password  </a>
                                     </div>
                                 </div>
                             </div>
@@ -1764,7 +1761,7 @@
                                         <p> You have not set a default billing address.  </p>
                                     </div>
                                     <div class="info-footer">
-                                        <a href="account-info.html" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
+                                        <a href="{% url 'account_info' %}" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
                                     </div>
                                 </div>
                             </div>
@@ -1775,7 +1772,7 @@
                                         <p> You have not set a default shipping address. </p>
                                     </div>
                                     <div class="info-footer">
-                                        <a href="account-info.html" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
+                                        <a href="{% url 'account_info' %}" class="btn btn-orange"> <i class="icofont-edit"></i>  Edit </a>
                                     </div>
                                 </div>
                             </div>

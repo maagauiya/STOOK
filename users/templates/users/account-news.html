@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'app1/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/icofont.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/owl.carousel.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/jquery-ui.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/icofont.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/jquery-ui.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'%}">
     <!-- <link rel="stylesheet" href="css/ar-style.css"> -->
 
     
@@ -1046,7 +1046,7 @@
                                             <li> <a href="blog.html" >Blog</a> </li>
                                             <li> <a href="faq.html" >FAQ</a> </li>
                                             <li> <a href="store-locator.html" >Store Locator</a> </li>
-                                            <li> <a href="account.html"> <i class="icofont-user"></i> Your Account	</a> </li>
+                                            <li> <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Your Account	</a> </li>
                                             <li> <a href="orders.html"> <i class="icofont-bag"></i>  Your Order	</a> </li>
                                             <li> <a href="Wishlist.html" class="Wishlist"> <i class="icofont-heart"></i> Your Wishlist </a> </li>
                                             <li> <a href="product-review.html"> <i class="icofont-eye-alt"></i>  Your Product Reviews  </a> </li>
@@ -1679,26 +1679,26 @@
                             <ul>
                                
                                 <li class="active">
-                                    <a href="account.html"> <i class="icofont-user"></i> Account Dashboard </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Account Dashboard </a>
                                 </li>
                                 <li>
-                                    <a href="account-info.html"> <i class="icofont-info"></i>  Account Information </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-info"></i>  Account Information </a>
                                 </li>
                                 <li>
-                                    <a href="account-address.html"> <i class="icofont-paper-plane"></i> Address Book  </a>
+                                    <a href="{% url 'account_address' %}"> <i class="icofont-paper-plane"></i> Address Book  </a>
                                 </li>
                                 <li>
-                                    <a href="account-orders.html"> <i class="icofont-numbered"></i> My Orders </a>
+                                    <a href="{% url 'account_orders' %}"> <i class="icofont-numbered"></i> My Orders </a>
                                 </li>
                              
                                
                                 <li>
-                                    <a href="account-news.html"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
+                                    <a href="{% url 'account_news' %}"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
                                 </li>
                         
                                
                                 <li>
-                                    <a href="account-wishlist.html"> <i class="icofont-cart"></i> Cart </a>
+                                    <a href="{% url 'account_wishlsit' %}"> <i class="icofont-cart"></i> Cart </a>
                                 </li>
                             </ul>
                         </div>
@@ -1751,12 +1751,12 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 
-    <script src="{% static 'app1/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{% static 'app1/js/popper.min.js'%}"></script>
-    <script src="{% static 'app1/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'app1/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'app1/js/jquery-ui.min.js'%}"></script>
-    <script src=" {% static 'app1/js/edit.js'%}"></script>
+    <script src="{% static 'users/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{% static 'users/js/popper.min.js'%}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'users/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
+    <script src=" {% static 'users/js/edit.js'%}"></script>
 
 
 

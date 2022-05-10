@@ -9,11 +9,11 @@
 
     <!-- Bootstrap CSS -->
   
-    <link rel="stylesheet" href="{% static 'app1/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/icofont.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/owl.carousel.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/jquery-ui.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/icofont.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/jquery-ui.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'%}">
     <!-- <link rel="stylesheet" href="css/ar-style.css"> -->
 
     
@@ -21,6 +21,17 @@
 </head>
 
 <body>
+
+
+    {% if messages is not none%}
+    {% for message in messages %}
+    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button> -->
+    <div class="alert  alert-info">
+      {{ message }}
+    </div>  
+    {% endfor %}
+    {%endif%}
+
 
     <div class="loader">
         <img src="images/spin.gif" class="img-fluid">
@@ -38,7 +49,7 @@
                     <div class="col-3">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="Stook_logo.png" alt="logo" class="img-fluid">
+                                <img src="{% static 'users/images/Stook_logo.png'%}" alt="logo" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -141,9 +152,20 @@
                     </div>
                     <div class="col-3">
                         <div class="cart-header">
-                            <img src="images/cart-ico.png" alt="cart" class="img-fluid">
+                            <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
                             <span class="cart-count"> 2 </span>
                             <span> ITEM (S) </span>
+                              
+                            <a style="margin-left: 10px !important;" href="{% url 'profile' %}"> 
+                                <span class="result-data">  My Profile </span> 	&nbsp;
+                                <form id="myForm"  method="POST" style = "display:inline" >
+                                    {% csrf_token %}
+                                    <input type="hidden" value="obj" name="logout">
+                                    <a id="sub" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Exit</a>
+                                </form>
+                          
+                            </a>
+                             
                         </div>
                         <div class="cart-dropdown">
                             <div class="top-info">
@@ -1066,7 +1088,7 @@
                                             <li> <a href="blog.html" >Blog</a> </li>
                                             <li> <a href="faq.html" >FAQ</a> </li>
                                             <li> <a href="store-locator.html" >Store Locator</a> </li>
-                                            <li> <a href="account.html"> <i class="icofont-user"></i> Your Account	</a> </li>
+                                            <li> <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Your Account	</a> </li>
                                             <li> <a href="orders.html"> <i class="icofont-bag"></i>  Your Order	</a> </li>
                                             <li> <a href="Wishlist.html" class="Wishlist"> <i class="icofont-heart"></i> Your Wishlist </a> </li>
                                             <li> <a href="product-review.html"> <i class="icofont-eye-alt"></i>  Your Product Reviews  </a> </li>
@@ -1696,26 +1718,26 @@
                             <ul>
                                
                                 <li class="active">
-                                    <a href="account.html"> <i class="icofont-user"></i> Account Dashboard </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Account Dashboard </a>
                                 </li>
                                 <li>
-                                    <a href="account-info.html"> <i class="icofont-info"></i>  Account Information </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-info"></i>  Account Information </a>
                                 </li>
                                 <li>
-                                    <a href="account-address.html"> <i class="icofont-paper-plane"></i> Address Book  </a>
+                                    <a href="{% url 'account_address' %}"> <i class="icofont-paper-plane"></i> Address Book  </a>
                                 </li>
                                 <li>
-                                    <a href="account-orders.html"> <i class="icofont-numbered"></i> My Orders </a>
+                                    <a href="{% url 'account_orders' %}"> <i class="icofont-numbered"></i> My Orders </a>
                                 </li>
                              
                                
                                 <li>
-                                    <a href="account-news.html"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
+                                    <a href="{% url 'account_news' %}"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
                                 </li>
                         
                                
                                 <li>
-                                    <a href="account-wishlist.html"> <i class="icofont-cart"></i> Cart </a>
+                                    <a href="{% url 'account_wishlsit' %}"> <i class="icofont-cart"></i> Cart </a>
                                 </li>
                             </ul>
                         </div>
@@ -1726,36 +1748,38 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="profile-content">
-                        <form action="account.html">
+                        <form method="POST">
+                            {% csrf_token %}
                             <div class="field required-field"> 
                                 <label> First Name </label>
-                                <input type="text" class="form-control" value="Bekarys">
+                                <input type="text" name="name" class="form-control" value={{name}}>
                             </div>
 
                             <div class="field required-field"> 
                                 <label> Last Name </label>
-                                <input type="text" class="form-control" value="Magauiya">
+                                <input type="text" name="surname" class="form-control" value={{surname}}>
                             </div>
 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="change_email">
                                 <label class="form-check-label" for="change_email">  Change Email </label>
                             </div>
-
+<!-- 
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="change-password">
-                                <label class="form-check-label" for="change-password">   Change Password </label>
-                            </div>
+                                <label type="hidden" class="form-check-label" for="change-password">   Change Password </label>
+                            </div> -->
 
                             <div class="change-email-form" id="change-email-form">
                                 <h5> Change Email </h5>
+                                
                                 <div class="field required-field"> 
                                     <label> Email </label>
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" name="email" placeholder="Email">
                                 </div>
                                 <div class="field required-field"> 
                                     <label> Current Password </label>
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
                             </div>
 
@@ -1771,7 +1795,11 @@
                                 </div>
                             </div>
                             
-                            <button class="btn btn-orange" type="submit">  Save </button>
+
+
+                            <input type="submit"  class="btn btn-orange " name="submit" value="Save">
+
+                            <!-- <button class="btn btn-orange" type="submit">  Save </button> -->
                         </form>
                     </div>
                 </div>
@@ -1805,12 +1833,12 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    <script src="{% static 'app1/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{% static 'app1/js/popper.min.js'%}"></script>
-    <script src="{% static 'app1/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'app1/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'app1/js/jquery-ui.min.js'%}"></script>
-    <script src=" {% static 'app1/js/edit.js'%}"></script>
+    <script src="{% static 'users/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{% static 'users/js/popper.min.js'%}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'users/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
+    <script src=" {% static 'users/js/edit.js'%}"></script>
 
 
 

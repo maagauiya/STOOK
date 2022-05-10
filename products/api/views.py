@@ -1,38 +1,17 @@
+from email.quoprimime import body_check
+from django.shortcuts import get_object_or_404
 from products.models import Category, Product, ProductComment
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 from products.models import Product
-from .serializers import ProductSerializer
+from .serializers import ProductCommentSerializer, ProductSerializer
 from rest_framework.decorators import api_view
 from django.db.models import Q
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 
-
-# @api_view(['GET'])
-# def get_products(request):
-#     query = request.query_params.get('q')
-#     if query == None:
-#         query = ''
-        
-#     products = Product.objects.filter()
-
-
-
-# class ProductList(generics.ListCreateAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
-#     #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-    
-# class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Product.objects.all()
-#     serializer_class = ProductSerializer
-#   #  №permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    
-    
 @api_view(['GET'])
 def get_product(request, pk):
     try:
@@ -123,3 +102,43 @@ def edit_product(request, pk):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
     except Exception as e:
         return Response({'details': f"{e}"},status=status.HTTP_204_NO_CONTENT)
+
+
+
+@api_view(['GET'])
+def get_comments(request, pk):
+    comments = ProductComment.objects.filter(product=pk)
+    serializer = ProductCommentSerializer(comments, many=True)
+    return Response(serializer.data)
+    
+
+@api_view(['DELETE'])
+@permission_classes((IsAuthenticated,))
+def delete_comment(request, pk):
+    comment = get_object_or_404(ProductComment, id=pk)
+    if comment.user == request.user:
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
+def create_comment(request, pk):
+    user = request.user
+    data = request.data
+    
+    product = get_object_or_404(Product, id=pk)
+    body = data.get('body')
+    rating = data.get('rating')
+    
+    comment = ProductComment.objects.create(
+        user = user,
+        product = product,
+        body = body,
+        rating = rating
+    )
+    comment.save()
+    serializer = ProductCommentSerializer(product, many=False)
+    return Response(serializer.data)

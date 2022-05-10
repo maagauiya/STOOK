@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'app1/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/icofont.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/owl.carousel.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/jquery-ui.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/icofont.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/jquery-ui.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'%}">
     <!-- <link rel="stylesheet" href="css/ar-style.css"> -->
 
     <!--  -->
@@ -22,7 +22,7 @@
 <body>
 
     <div class="loader">  
-        <img src="{% static 'app1/images/spin.gif'%}" class="img-fluid">
+        <img src="{% static 'users/images/spin.gif'%}" class="img-fluid">
     </div>
 
     <!--  START BASIC HEADER -->
@@ -37,7 +37,7 @@
                         <div class="logo">
                             <a href="index.html">
                                 
-                                <img src="{% static 'app1/images/Stook_logo.png'%}" alt="logo" class="img-fluid">
+                                <img src="{% static 'users/images/Stook_logo.png'%}" alt="logo" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
                     <div class="col-3">
                         <div class="cart-header">
                             
-                            <img src="{% static 'app1/images/cart-ico.png'%}" alt="cart" class="img-fluid">
+                            <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
                             <span class="cart-count"> 2 </span>
                             <span> ITEM (S) </span>
                         </div>
@@ -155,7 +155,7 @@
                             <div class="dropdown-items">
                                 <div class="item-box">
                                     
-                                    <img src="{% static 'app1/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    <img src="{% static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
                                     <div class="data">
                                         <a class="descr" href="#"> SALE 22% OFF - Actual Personalized Necklace - Handwriting Jewelry </a>
                                         <h3> 20,00 $ </h3>
@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="item-box">
                                     
-                                    <img src="{% static 'app1/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    <img src="{% static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
                                     <div class="data">
                                         <a class="descr" href="#"> SALE 22% OFF - Actual Personalized Necklace - Handwriting Jewelry </a>
                                         <h3> 20,00 $ </h3>
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                                 <div class="item-box">
-                                    <img src="{% static 'app1/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    <img src="{% static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
                                     <div class="data">
                                         <a class="descr" href="#"> SALE 22% OFF - Actual Personalized Necklace - Handwriting Jewelry </a>
                                         <h3> 20,00 $ </h3>
@@ -1047,7 +1047,7 @@
                                             <li> <a href="blog.html" >Blog</a> </li>
                                             <li> <a href="faq.html" >FAQ</a> </li>
                                             <li> <a href="store-locator.html" >Store Locator</a> </li>
-                                            <li> <a href="account.html"> <i class="icofont-user"></i> Your Account	</a> </li>
+                                            <li> <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Your Account	</a> </li>
                                             <li> <a href="orders.html"> <i class="icofont-bag"></i>  Your Order	</a> </li>
                                             <li> <a href="Wishlist.html" class="Wishlist"> <i class="icofont-heart"></i> Your Wishlist </a> </li>
                                             <li> <a href="product-review.html"> <i class="icofont-eye-alt"></i>  Your Product Reviews  </a> </li>
@@ -1675,26 +1675,28 @@
                     <div class="main-side">
                         <div class="profile-links">
                             <ul>
-                            
-                                    <a href="account.html"> <i class="icofont-user"></i> Account Dashboard </a>
-                                </li>
-                                <li>
-                                    <a href="account-info.html"> <i class="icofont-info"></i>  Account Information </a>
-                                </li>
+                               
                                 <li class="active">
-                                    <a href="account-address.html"> <i class="icofont-paper-plane"></i> Address Book  </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-user"></i> Account Dashboard </a>
                                 </li>
                                 <li>
-                                    <a href="account-orders.html"> <i class="icofont-numbered"></i> My Orders </a>
+                                    <a href="{% url 'account_info' %}"> <i class="icofont-info"></i>  Account Information </a>
                                 </li>
-                              
-                                
                                 <li>
-                                    <a href="account-news.html"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
+                                    <a href="{% url 'account_address' %}"> <i class="icofont-paper-plane"></i> Address Book  </a>
                                 </li>
-
                                 <li>
-                                    <a href="account-wishlist.html"> <i class="icofont-cart"></i> Cart </a>
+                                    <a href="{% url 'account_orders' %}"> <i class="icofont-numbered"></i> My Orders </a>
+                                </li>
+                             
+                               
+                                <li>
+                                    <a href="{% url 'account_news' %}"> <i class="icofont-envelope-open"></i> Newsletter Subscriptions </a>
+                                </li>
+                        
+                               
+                                <li>
+                                    <a href="{% url 'account_wishlsit' %}"> <i class="icofont-cart"></i> Cart </a>
                                 </li>
                             </ul>
                         </div>
@@ -1719,17 +1721,13 @@
                                             <p> <label> T : </label> 01099285016 </p>
                                         </div>
                                         <div class="info-footer">
-                                            <a href="account-new-address.html" class="btn btn-orange">   Change Shipping Address </a>
+                                            <a href="{% url 'account_new' %}" class="btn btn-orange">   Change Shipping Address </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <h2> Additional Address Entries  </h2>
-                            
-                            <p> You have no other address entries in your address book </p>
-
-                            <a href="account-new-address.html" class="btn btn-orange"> Add New Address </a>
+                           
 
                         </div>
                     </div>
@@ -1767,12 +1765,12 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    <script src="{% static 'app1/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{% static 'app1/js/popper.min.js'%}"></script>
-    <script src="{% static 'app1/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'app1/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'app1/js/jquery-ui.min.js'%}"></script>
-    <script src=" {% static 'app1/js/edit.js'%}"></script>
+    <script src="{% static 'users/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{% static 'users/js/popper.min.js'%}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'users/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
+    <script src=" {% static 'users/js/edit.js'%}"></script>
 
 
 </body>

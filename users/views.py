@@ -5,6 +5,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login ,logout
 # Create your views here.
 from django.contrib.auth.models import User
+from requests import request
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -62,4 +63,58 @@ def account_page(request):
         return render(request, "users/account.html")
 
 
+def account_info(request):
+    if request.POST.get('logout'):
+        logout(request)
+        return redirect('/signin')
+  
+    if request.POST.get('name'):
+        user = User.objects.get(username=request.user.username)
+        user.first_name = request.POST.get('name')
+        user.last_name = request.POST.get('surname')
+        user.save()
+        context={ 
+        'name':request.POST.get('name'),
+        'surname':request.POST.get('surname')
+        }
+        if request.POST.get('email'):
+            if user.check_password(request.POST.get('password')) == True:
+                user.email = request.POST.get('email')
+                user.save()
+                messages.success(request,'Email updated')
+            else:
+                messages.success(request,'Incorrect password,please try again')
 
+        return render(request, "users/account-info.html",context)
+
+
+    context={ 
+        'name':request.user.first_name,
+        'surname':request.user.last_name
+    }
+
+    return render(request, "users/account-info.html",context)
+
+def account_address(request):
+    if request.POST.get('logout'):
+        logout(request)
+        return redirect('/signin')
+
+    return render(request, "users/account-address.html")
+
+
+def account_new(request):
+    if request.POST.get('logout'):
+        logout(request)
+        return redirect('/signin')
+    return render(request, "users/account-new-address.html")
+
+
+def account_orders(request):
+    return render(request, "users/account-orders.html")
+
+def account_news(request):
+    return render(request, "users/account-news.html")
+
+def account_wishlist(request):
+    return render(request, "users/account-wishlist.html")
