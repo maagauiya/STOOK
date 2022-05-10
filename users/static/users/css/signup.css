@@ -28,6 +28,7 @@ body{
 .btn{
   width: 360px !important;
   height: 30px !important;
+  font-size: 15px !important;
 }
 .cc{
   position: relative !important;

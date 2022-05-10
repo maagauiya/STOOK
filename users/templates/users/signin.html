@@ -1,5 +1,6 @@
 {%load static%}
-
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -47,13 +48,15 @@
                     <input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password">
                   </div>
                   <div class="text-center mt-3">
-                    <input type="submit" style="background-color: orange !important; border-color: darkorange !important;" class="btn btn-lg btn-primary" name="login" value="Войти">
+                    <input type="submit" style="background-color: orange !important; border-color: darkorange !important; text-align: center !important;" class="btn btn-lg btn-primary " name="login" value="Войти">
 
                     <hr class="hrhr">
                     У вас нет аккаунта?
                     <br>
                     <a href="{% url 'signup' %}">Регистрация</a> <br>
                     Зарегистрируйтесь с помощью: <br>
+                    <a href="{% provider_login_url "google" method="oauth2"  %}" ><img style="width: 40px; height: 40px;" src="{% static 'users/images/google.png'%}" alt=""> &nbsp;</a>
+
                     
                     <!-- <img style="width: 40px; height: 40px;" src="facebook.png" alt=""> &nbsp; -->
                     <!-- <img style="width: 40px; height: 40px;" src="vk.png" alt=""> -->

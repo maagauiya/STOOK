@@ -18,11 +18,13 @@ body{
 .btn{
   width: 310px !important;
   height: 30px !important;
+  font-size: 17px !important;
 }
 .cc{
   position: relative !important;
   bottom: 45% !important;
   font-size: 15px !important;
+  /* text-align: center !important; */
 }
 
 .card {
