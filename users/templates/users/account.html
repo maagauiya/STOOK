@@ -137,14 +137,26 @@
                             </div>
                         </form>
                     </div>
+                   
                     <div class="col-3">
                         <div class="cart-header">
                             <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
                             <span class="cart-count"> 2 </span>
                             <span> ITEM (S) </span>
+                              
                             <a style="margin-left: 10px !important;" href="{% url 'profile' %}"> 
-                                <span class="result-data">  My Profile </span> 
+                                <span class="result-data">  My Profile </span> 	&nbsp;
+                                <form id="myForm"  method="POST" style = "display:inline" >
+                                    {% csrf_token %}
+                                    
+                                    
+
+                                    <input type="hidden" value="obj" name="logout">
+                                    <a id="sub" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Exit</a>
+                                </form>
+                          
                             </a>
+                             
                         </div>
                         <div class="cart-dropdown">
                             <div class="top-info">
@@ -202,6 +214,7 @@
                             </div>
                         </div>
                     </div>
+         
                 </div>
             </div>
         </div>

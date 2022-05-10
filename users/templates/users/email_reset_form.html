@@ -1,6 +1,6 @@
 {%load static%}
 {% load socialaccount %}
-{% providers_media_js %} -->
+{% providers_media_js %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -24,24 +24,29 @@
           </div>
           <form  method="POST" >
             {% csrf_token %}
-          <div class="card">
+          <div class="card" style="height: 500px !important;">
             <div class="text-center mt-4">
               <a href="/main">  <img class="logo" src="{% static 'users/images/Stook_logo.png'%}" alt="404"></a>
             </div>
             <div class="card-body">
               <div class="m-sm-4">
                   <center>
-                Your password can't be too similar to your other personal information.
-                Your password must contain at least 8 characters.
-                Your password can't be a commonly used password.
-                Your password can't be entirely numeric.
+                    <ul>
+                      <li style="font-size: 13px ;">Your password can't be too similar to your other personal information.</li>
+                      <li style="font-size: 13px ;">Your password must contain at least 8 characters.</li>
+                      <li style="font-size: 13px ;">Your password can't be a commonly used password.</li>
+                      <li style="font-size: 13px ;">Your password can't be entirely numeric.</li>
+                    </ul>
+           
+                
+          
                 </center>
 
                   <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" name="new_password1" placeholder="Enter your new password">
+                    <input class="form-control form-control-lg" type="password" name="new_password1" placeholder="Enter your new password">
                   </div>
                   <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" name="new_password2" placeholder="Confirm password">
+                    <input class="form-control form-control-lg" type="password" name="new_password2" placeholder="Confirm password">
                   </div>
 
                     <input type="submit" style="background-color: orange !important; border-color: darkorange !important; text-align: center !important;" class="btn btn-lg btn-primary " name="Update Password" value="Reset">

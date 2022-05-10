@@ -42,6 +42,12 @@ def signup(request):
 
 
 def account_page(request):
+ 
+    if request.POST.get('logout'):
+        logout(request)
+        return redirect('/signin')
+   
+
     if request.user.username =='':
         return redirect('/signin/')
     try:
