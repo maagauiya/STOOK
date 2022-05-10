@@ -46,6 +46,7 @@ def create_orders(request):
             status = _status
         )
         order.save()
+        i.delete()
         orders.append(order)
         
     _orders = Order.objects.filter(id__in=[i.id for i in orders])
