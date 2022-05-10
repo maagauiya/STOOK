@@ -1,0 +1,42 @@
+body{
+    margin-top:7%;
+    background-color: #f2f3f8;
+     overflow-x: hidden;
+}
+.card {
+  width: 400px !important;
+  height: 500px !important;
+  position: relative !important;
+  left: 60% !important;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+.form-control{
+  height: 30px !important;
+  font-size: 15px !important;
+}
+.btn{
+  width: 310px !important;
+  height: 30px !important;
+  font-size: 17px !important;
+}
+.cc{
+  position: relative !important;
+  bottom: 45% !important;
+  font-size: 15px !important;
+  /* text-align: center !important; */
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e5e9f2;
+    border-radius: .5rem;
+}
