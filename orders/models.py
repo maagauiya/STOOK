@@ -15,6 +15,7 @@ class Order(models.Model):
     city = models.CharField(max_length=50, default='')
     address = models.CharField(max_length=200)
     post_number = models.CharField(max_length=50)
+    price = models.FloatField(blank=True, null=True)
     track_number = models.IntegerField(blank=True, null=True)
     order_date = models.DateTimeField(auto_now_add=True)
     shipping_date = models.DateTimeField(blank=True, null=True)

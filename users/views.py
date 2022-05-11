@@ -170,8 +170,7 @@ def account_orders(request):
     print("UUUU",request.user.pk)
     context = {
         "orders" : order,
-        "price" : prices,
-        "index" : 0
+        
     }
 
     
