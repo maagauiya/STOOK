@@ -18,10 +18,11 @@ from requests import request
 from .models import *
 from orders.models import *
 from products.models import *
+from cart.models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 def signin(request):
-    
+   
 
     if request.POST.get('login'):
         username = request.POST.get('username')
@@ -29,7 +30,7 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/account/')
+            return redirect('/index/')
         else:
             messages.error(request,'wrong password or login')
             # return render(request,'users/signin.html')
@@ -61,7 +62,7 @@ def account_page(request):
    
 
     if request.user.username =='':
-        return redirect('/signin/')
+        return redirect('/')
     try:
         context = {
                     'username':request.user.username,
@@ -159,15 +160,7 @@ def account_orders(request):
     # order=serializers.serialize("json",Order.objects.filter(client_id = request.user.pk))
     # print("dsdsadas",order)
     order = Order.objects.filter(client_id = request.user.pk)
-    order_p = Order.objects.filter(client_id =  request.user.pk)
-    product_ids = []
-    for i in order_p:
-        product_ids.append(i.product_id)
-    prices = []
-    for i in product_ids:
-        product = Product.objects.get(id=i)
-        prices.append(product.price)
-    print("UUUU",request.user.pk)
+    
     context = {
         "orders" : order,
         
@@ -182,3 +175,19 @@ def account_news(request):
 
 def account_wishlist(request):
     return render(request, "users/account-wishlist.html")
+
+
+def index(request):
+    cart = CartItem.objects.filter(user_id =  request.user.pk)
+    context = { 
+        "cart":cart
+    }
+    if request.POST.get('logout'):
+        print("ksdjflkdjlkfjsdlkjflksd")
+        logout(request)
+        return redirect('/signin')
+    return render(request, "users/index.html",context=context)
+
+def product_page(request):
+    return render(request, "users/product.html")
+

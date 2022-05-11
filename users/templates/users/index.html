@@ -146,7 +146,13 @@
                             <span> ITEM (S) </span>
                             <a style="margin-left: 10px !important;" href="{% url 'profile' %}"> 
                                 <span class="result-data">  My Profile </span> 
+
                             </a>
+                            <form id="myForm"  method="POST" style = "display:inline" >
+                                {% csrf_token %}
+                                <input type="hidden" value="obj" name="logout">
+                                <a id="sub" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Exit</a>
+                            </form>
                         </div>
                         <div class="cart-dropdown">
                             <div class="top-info">
@@ -158,6 +164,7 @@
                             <div class="dropdown-items">
                                 <div class="item-box">
                                     <img src="{%static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    {% for  carts in cart %}
                                     <div class="data">
                                         <a class="descr" href="#"> Iphone 6, 64GB, Space Gray, Technodom </a>
                                         <h3> 169000KZT </h3>
@@ -169,12 +176,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {% endfor %}
                                 </div>
    
                             
                             </div>
                             <div class="bottom-info">
-                                <a class="btn-orange" href="account-wishlist.html"> View and edit cart </a>
+                                <a class="btn-orange" href="{% url 'account_orders' %}"> View and edit cart </a>
                             </div>
                         </div>
                     </div>

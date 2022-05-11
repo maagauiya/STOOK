@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'app1/css/bootstrap.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/icofont.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/owl.carousel.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/jquery-ui.min.css'%}">
-    <link rel="stylesheet" href="{% static 'app1/css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/icofont.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/jquery-ui.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'%}">
     <!-- <link rel="stylesheet" href="css/ar-style.css"> -->
 
     
@@ -31,8 +31,8 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="logo">
-                            <a href="index.html">
-                                <img src="Stook_logo.png" alt="logo" class="img-fluid">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'users/images/Stook_logo.png' %}" alt="logo" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         
                         <div class="cart-header">
                             
-                            <img src="images/cart-ico.png" alt="cart" class="img-fluid">
+                            <img src="{% static 'users/images/cart-ico.png'%" alt="cart" class="img-fluid">
                             <span class="cart-count"> 2 </span>
                             <span> ITEM (S) </span>
                             
@@ -602,12 +602,12 @@
 
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="{% static 'app1/js/jquery-3.2.1.min.js'%}"></script>
-    <script src="{% static 'app1/js/popper.min.js'%}"></script>
-    <script src="{% static 'app1/js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'app1/js/owl.carousel.min.js'%}"></script>
-    <script src="{% static 'app1/js/jquery-ui.min.js'%}"></script>
-    <script src=" {% static 'app1/js/edit.js'%}"></script>
+    <script src="{% static 'users/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{% static 'users/js/popper.min.js'%}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'users/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
+    <script src=" {% static 'users/js/edit.js'%}"></script>
 
 </body>
 

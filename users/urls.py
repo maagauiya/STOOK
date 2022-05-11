@@ -9,7 +9,7 @@ from django.urls import path, include
 from django.urls import path
 
 urlpatterns = [
-    path('signin/', signin,name='signin'),
+    path('', signin,name='signin'),
     path('signup/',signup,name='signup'),
     path('account/',account_page,name='profile'),
     path('reset_password/',
@@ -33,6 +33,8 @@ urlpatterns = [
     path('account_orders/',account_orders,name='account_orders'),
     path('account_news/',account_news,name='account_news'),
     path('account_wishlist/',account_wishlist,name='account_wishlsit'),
+    path('index/',index, name='index'),
+    path('product/',product_page,name='product_page')
 
 
 ]
