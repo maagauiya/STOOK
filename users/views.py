@@ -1,12 +1,23 @@
 
+import imp
+
+
+import datetime
+from itertools import product
+from math import prod
+from pydoc import cli
 import time
+from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login ,logout
 # Create your views here.
 from django.contrib.auth.models import User
+from pyparsing import Or
 from requests import request
 from .models import *
+from orders.models import *
+from products.models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 def signin(request):
@@ -96,24 +107,78 @@ def account_info(request):
     return render(request, "users/account-info.html",context)
 
 def account_address(request):
+    user = UserProfile.objects.get(username=request.user.username)
+    context = { 
+        "street" : user.street,
+        "city" :   user.city,
+        "postal" : user.postal_cofde,
+        "apartment" :   user.apartment,
+        "phone" : user.phone_number
+    }
     if request.POST.get('logout'):
         logout(request)
         return redirect('/signin')
 
-    return render(request, "users/account-address.html")
+    return render(request, "users/account-address.html",context=context)
 
 
 def account_new(request):
+    user = UserProfile.objects.get(username=request.user.username)
+
     if request.POST.get('logout'):
         logout(request)
         return redirect('/signin')
-    return render(request, "users/account-new-address.html")
+    if request.POST.get('savee'):
+        user.city = request.POST.get('city')
+        user.street = request.POST.get('street')
+        user.postal_cofde = request.POST.get('postalcode')
+        user.apartment = request.POST.get('apartment')
+        user.phone_number = request.POST.get('phone')
+        user.save()
+        context = { 
+        "street" : request.POST.get('street'),
+        "city" : request.POST.get('city'),
+        "postal" : request.POST.get('postalcode'),
+        "apartment": request.POST.get('apartment'),
+        "phone": request.POST.get('phone')
+        }   
+        return render(request, "users/account-new-address.html",context=context)
+
+
+    context = { 
+        "street" : user.street,
+        "city" :   user.city,
+        "postal" : user.postal_cofde,
+        "apartment" :   user.apartment,
+        "phone" : user.phone_number
+    }
+    return render(request, "users/account-new-address.html",context=context)
 
 
 def account_orders(request):
-    return render(request, "users/account-orders.html")
+    # order=serializers.serialize("json",Order.objects.filter(client_id = request.user.pk))
+    # print("dsdsadas",order)
+    order = Order.objects.filter(client_id = request.user.pk)
+    order_p = Order.objects.filter(client_id =  request.user.pk)
+    product_ids = []
+    for i in order_p:
+        product_ids.append(i.product_id)
+    prices = []
+    for i in product_ids:
+        product = Product.objects.get(id=i)
+        prices.append(product.price)
+    print("UUUU",request.user.pk)
+    context = {
+        "orders" : order,
+        "price" : prices,
+        "index" : 0
+    }
+
+    
+    return render(request, "users/account-orders.html",context=context)
 
 def account_news(request):
+   
     return render(request, "users/account-news.html")
 
 def account_wishlist(request):

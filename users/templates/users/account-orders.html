@@ -1707,18 +1707,9 @@
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="profile-content">
                         <div class="filter-head"> 
-                            <p> 1 Item </p>
-                            <ul> 
-                                <li> show </li>
-                                <li> 
-                                    <select>
-                                        <option value="10"> 10 </option>
-                                        <option value="20"> 20 </option>
-                                        <option value="30"> 30 </option>
-                                    </select>
-                                </li>
-                                <li> per page</li>
-                            </ul>
+                           
+                          
+                           
                         </div>
 
                         <div class="table-box">
@@ -1734,17 +1725,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    {% for  order in orders %}
                                     <tr>
-                                        <th scope="row"> 000000084 </th>
-                                        <td> 22/04/2022 </td>
-                                        <td> Bekarys Magauiya </td>
-                                        <td> 21000KZT	 </td>
-                                        <td> Pending </td>
+                                        
+                                        <th scope="row"> {{order.track_number}} </th>
+                                        <td> {{order.shipping_date}} </td>
+                                        <td> {{order.city}},{{order.address}} </td>
+                                                                              
+                                        
+                                      
+                                        <td> {{price}} KZT	 </td>
+               
+
+                                        <td> {{order.status}} </td>
                                         <td> 
+                                            
                                             <a href="order-details.html"> View  </a>
                                             <a href="cart.html"> Reorder </a>
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

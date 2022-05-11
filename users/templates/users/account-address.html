@@ -1714,11 +1714,13 @@
                                     <div class="info-box">
                                         <div class="info-head"> Default Shipping Address </div>
                                         <div class="info-body">
-                                            <p> Nur-Sultan </p>
-                                            <p> Bekturova 4/2 </p>
-                                            <p> Podium 2 </p>
-                                            <p> Apartment 40 </p>
-                                            <p> <label> T : </label> 01099285016 </p>
+                                        
+                                            <p> <label> City : </label> {{city}} </p>
+                                            <p> <label> Street : </label> {{street}} </p>
+                                            <p> <label> Apartment : </label> {{apartment}} </p>
+                                            <p> <label> Phone number : </label> {{phone}} </p>
+                                            <p> <label> Postal code : </label> {{postal}} </p>
+
                                         </div>
                                         <div class="info-footer">
                                             <a href="{% url 'account_new' %}" class="btn btn-orange">   Change Shipping Address </a>

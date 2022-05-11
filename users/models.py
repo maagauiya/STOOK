@@ -11,6 +11,10 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=200, null=True, blank=True)
     region = models.CharField(max_length=200, null=True, blank=True)
     city = models.CharField(max_length=200, null=True, blank=True)
+    street = models.CharField(max_length=200, null=True, blank=True)
+    postal_cofde = models.CharField(max_length=200, null=True, blank=True)
+    apartment = models.CharField(max_length=200, null=True, blank=True)
+
     profile_pic = models.ImageField(blank=True, null=True)
     bio = models.TextField(null=True, blank=True)
     email_verified = models.BooleanField(default=False)

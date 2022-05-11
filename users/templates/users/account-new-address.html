@@ -240,34 +240,48 @@
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="profile-content">
                         <form method="POST">
-                            
+                            {% csrf_token %}
                             
 
 
                             <h4> Address </h4>
 
                             <div class="field required-field"> 
+
+                                <div class="field required-field"> 
+                                    <label> City  </label>
+                                    <input type="text" name="city" class="form-control" value={{city}}>
+                                </div>
+
                                 <label> Street </label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="street" class="form-control" value={{street}}>
+                            </div>
+
+                            
+
+                            <div class="field required-field"> 
+                                <label> Apartment  </label>
+                                <input type="text" name="apartment" class="form-control" value={{apartment}}>
                             </div>
 
                             <div class="field required-field"> 
-                                <label> City  </label>
-                                <input type="text" class="form-control">
+                                <label> PhoneNumber  </label>
+                                <input type="text" name="phone" class="form-control" value={{phone}}>
                             </div>
+
 
                             
 
                             <div class="field required-field"> 
                                 <label> Postal Code  </label>
-                                <input type="text" class="form-control">
+                                <input type="text" name="postalcode" class="form-control" value={{postal}}>
                             </div>
 
                             
 
                         
-                            
-                            <button class="btn btn-orange" type="submit">  Save </button>
+                            <input type="submit"  class="btn btn-orange" name="savee" value="Save">
+
                         </form>
                     </div>
                 </div>

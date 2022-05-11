@@ -1,0 +1,2 @@
+Requirement already satisfied: Jinja2 in ./venv/lib/python3.9/site-packages (3.0.3)
+Requirement already satisfied: MarkupSafe>=2.0 in ./venv/lib/python3.9/site-packages (from Jinja2) (2.0.1)
