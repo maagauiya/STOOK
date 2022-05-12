@@ -1,7 +1,5 @@
 
 import imp
-
-
 import datetime
 from itertools import product
 from math import prod
@@ -173,13 +171,38 @@ def account_news(request):
     return render(request, "users/account-news.html")
 
 def account_wishlist(request):
-    return render(request, "users/account-wishlist.html")
+    cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
+    total = 0
+
+    for i in cart:
+        total += i.total
+       
+    
+    context = { 
+        "cart":cart,
+        "total":total,
+        "items": len(cart)
+
+    }
+    if request.POST.get('buy'):
+        return HttpResponse(request.POST.get('buy'))
+    return render(request, "users/account-wishlist.html",context=context)
 
 
 def index(request):
-    cart = CartItem.objects.filter(user_id =  request.user.pk)
+    
+    cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
+    total = 0
+
+    for i in cart:
+        total += i.total
+       
+    
     context = { 
-        "cart":cart
+        "cart":cart,
+        "total":total,
+        "items": len(cart)
+
     }
     if request.POST.get('logout'):
         print("ksdjflkdjlkfjsdlkjflksd")
@@ -187,6 +210,10 @@ def index(request):
         return redirect('/signin')
     return render(request, "users/index.html",context=context)
 
-def product_page(request):
-    return render(request, "users/product.html")
+def product_page(request,number):
+    product = Product.objects.get(id= number)
+    context = { 
+        "product": product
+    }
+    return render(request, "users/product.html",context=context)
 

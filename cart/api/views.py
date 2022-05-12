@@ -21,6 +21,7 @@ def add_in_cart(request):
     product_id = data.get('product')
     quantity = data.get('quantity')
     
+    
     product = get_object_or_404(Product, id=product_id)
     
     find_dup = CartItem.objects.filter(product=product).first()
@@ -31,6 +32,10 @@ def add_in_cart(request):
         user = user,
         product = product,
         quantity = quantity,
+        price = product.price,
+        name = product.name,
+        total = product.price*quantity
+
     )
     serializer = CartItemSerializer(cart_item, many=False)
     return Response(serializer.data)

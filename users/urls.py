@@ -34,7 +34,7 @@ urlpatterns = [
     path('account_news/',account_news,name='account_news'),
     path('account_wishlist/',account_wishlist,name='account_wishlsit'),
     path('index/',index, name='index'),
-    path('product/',product_page,name='product_page')
+    path('product/<int:number>',product_page,name='product_page')
 
 
 ]

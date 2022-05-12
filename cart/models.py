@@ -6,4 +6,7 @@ from products.models import Product
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
+    total = models.FloatField(blank=True, null=True)
+    name = models.CharField(max_length=50,blank=True, null=True)

@@ -19,6 +19,9 @@ class Product(models.Model):
     price = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.name
 
 class ProductComment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -29,4 +32,6 @@ class ProductComment(models.Model):
     
     def __str__(self):
         return str(self.user.username)
+
+    
 
