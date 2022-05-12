@@ -19,6 +19,9 @@ class Product(models.Model):
     price = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name
@@ -32,4 +35,6 @@ class ProductComment(models.Model):
     
     def __str__(self):
         return str(self.user.username)
+
+    
 

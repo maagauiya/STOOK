@@ -36,8 +36,8 @@
                 <div class="row">
                     <div class="col-3">
                         <div class="logo">
-                            <a href="index.html">
-                                <img src="Stook_logo.png" alt="logo" class="img-fluid">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'users/images/Stook_logo.png' %}" alt="logo" class="img-fluid">
                             </a>
                         </div>
                     </div>
@@ -1075,7 +1075,7 @@
                     <span></span>
                 </button>
                 <div class="logo-box">
-                    <a href="index.html">
+                    <a href="{% url 'index' %}">
                         <img src="images/logo_amazon.png" alt="logo" class="img-fluid">
                     </a>
                 </div>
@@ -1710,20 +1710,27 @@
                 <div class="col-12 col-md-8 col-lg-9">
                     <div class="profile-content wishlist-content">
                        
-                   
+                        {% for  i in cart %}
                         <div class="whislist-product">
                             <div class="img-box">
                                 <a href="product.html"> <img src="images/st-3.png" class="img-fluid"> </a>
                             </div>
+
+                           
                             <div class="data">
-                                <a href="product.html"> <h3> abea tech, Camera </h3> </a>
-                                <h5> 17000KZT</h5>
-                                <form action="">
+                                <a href="product.html"> <h3> {{i.name}} </h3> </a>
+                                <h5> {{i.total}}KZT</h5>
+                                <form id="myForm" method="POST">
+                                    {% csrf_token %}
                                     <textarea placeholder="enter your comment"></textarea>
                                     <div class="footer">
                                         <div class="cart-mount">
                                             <input type="text" class="item-number" class="form-control" value="1">
-                                            <button class="btn btn-empty"> <i class="icofont-buy"></i> Buy </button>
+                                                
+                                            <input type="hidden" value={{i.id}} name="buy">
+
+                                            <a id="sub"  class="btn btn-empty" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Buy</a>
+                                            <!-- <button class="btn btn-empty"> <i class="icofont-buy"></i> Buy </button> -->
                                         </div>
                                         <div class="actions">
                                             <a href="#" class="action-link"> <i class="icofont-edit"></i> EDIT </a>
@@ -1732,7 +1739,9 @@
                                     </div>
                                 </form>
                             </div>
+                            
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

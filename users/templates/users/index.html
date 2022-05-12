@@ -142,39 +142,51 @@
                     <div class="col-3">
                         <div class="cart-header">
                             <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
-                            <span class="cart-count"> 1 </span>
+                            <span class="cart-count"> {{items}} </span>
                             <span> ITEM (S) </span>
                             <a style="margin-left: 10px !important;" href="{% url 'profile' %}"> 
                                 <span class="result-data">  My Profile </span> 
+
                             </a>
+                            <form id="myForm"  method="POST" style = "display:inline" >
+                                {% csrf_token %}
+                                <input type="hidden" value="obj" name="logout">
+                                <a id="sub" href="javascript:void(0);" onclick="document.getElementById('myForm').submit();">Exit</a>
+                            </form>
                         </div>
                         <div class="cart-dropdown">
                             <div class="top-info">
-                                <div class="counts"> 1 item  <span class="close"> <i class="icofont-close-line"></i> </span> </div>
-                                <p> <label> Cart Subtotal : </label> 169000KZT</p>
+                                <div class="counts"> {{items}} item  <span class="close"> <i class="icofont-close-line"></i> </span> </div>
+                                <p> <label> Cart Subtotal : </label> {{total}}KZT</p>
                                 <a class="btn-orange" href="cart.html"> Go to Checkout </a>
                             </div>
-
+                            
                             <div class="dropdown-items">
+                                {% for  i in cart %}
                                 <div class="item-box">
                                     <img src="{%static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    
                                     <div class="data">
-                                        <a class="descr" href="#"> Iphone 6, 64GB, Space Gray, Technodom </a>
-                                        <h3> 169000KZT </h3>
+                                        <a class="descr" href="#"> {{i.name}} </a>
+                                        
+                                        <h3>  {{i.total}} KZT </h3>
                                         <div class="item-footer">
-                                            <p>  Qty :   <input type="text" value="1"> </p>
+                                            <p>  Qty :    <input type="text" value={{i.quantity}}> </p>
                                             <div class="actions">
                                                 <a data-toggle="modal" data-target="#delete-modal"> <i class="icofont-ui-delete"></i> </a>
                                                 <a href="#"> <i class="icofont-gear"></i> </a>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    
                                 </div>
+                                {% endfor %}
    
                             
                             </div>
                             <div class="bottom-info">
-                                <a class="btn-orange" href="account-wishlist.html"> View and edit cart </a>
+                                <a class="btn-orange" href="{% url 'account_orders' %}"> View and edit cart </a>
                             </div>
                         </div>
                     </div>
@@ -1940,7 +1952,13 @@
     <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
     <script src="{% static 'users/js/edit.js'%}"></script>
 
+    <script>
 
+    function square(price,quantity) {
+       return price * price;
+    }
+
+    </script>
 
 </body>
 
