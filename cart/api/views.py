@@ -26,7 +26,6 @@ def add_in_cart(request):
     find_dup = CartItem.objects.filter(product=product).first()
     if find_dup != None:
         return Response(status=status.HTTP_451_UNAVAILABLE_FOR_LEGAL_REASONS)
-
     cart_item = CartItem.objects.create(
         user = user,
         product = product,
