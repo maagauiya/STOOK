@@ -33,7 +33,8 @@ def add_in_cart(request):
         quantity = quantity,
         price = product.price,
         name = product.name,
-        total = product.price*quantity
+        total = product.price*quantity,
+        image_path = product.image_path
 
     )
     serializer = CartItemSerializer(cart_item, many=False)

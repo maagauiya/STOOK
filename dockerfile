@@ -12,5 +12,5 @@ RUN pip install -r /usr/src/app/requirements.txt
 COPY . /usr/src/app
 
 EXPOSE 8000
-
+CMD ["python","manage.py","migrate"]
 CMD ["python","manage.py","runserver","manage.py"]

@@ -10,3 +10,4 @@ class CartItem(models.Model):
     price = models.FloatField(blank=True, null=True)
     total = models.FloatField(blank=True, null=True)
     name = models.CharField(max_length=50,blank=True, null=True)
+    image_path = models.CharField(max_length=100,blank=True, null=True)

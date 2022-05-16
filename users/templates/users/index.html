@@ -164,7 +164,7 @@
                             <div class="dropdown-items">
                                 {% for  i in cart %}
                                 <div class="item-box">
-                                    <img src="{%static 'users/images/phone-2.jpg'%}" alt="prod" class="img-fluid">
+                                    <img src={{i.image_path}} id="image_id" alt="prod" class="img-fluid">
                                     
                                     <div class="data">
                                         <a class="descr" href="#"> {{i.name}} </a>
@@ -1952,14 +1952,19 @@
     <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
     <script src="{% static 'users/js/edit.js'%}"></script>
 
-    <script>
+  
+     <!-- <script>
 
-    function square(price,quantity) {
-       return price * price;
-    }
 
-    </script>
+const data = eval("{{cart2 | escapejs}}");
+for (let i = 0; i <data.length; i++){ 
+    document.getElementById("image_id").src=data[0].fields.image_path;
 
+    
+}
+
+
+     </script> -->
 </body>
 
 </html>

@@ -112,7 +112,7 @@
                         
                         <div class="cart-header">
                             
-                            <img src="{% static 'users/images/cart-ico.png'%" alt="cart" class="img-fluid">
+                            <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
                             <span class="cart-count"> 2 </span>
                             <span> ITEM (S) </span>
                             
@@ -241,7 +241,6 @@
                     <div class="product-details">
                         <h3> {{product.name}} </h3>
                         <p> <label> Цена : </label> <span> {{product.price}} </span> </p>
-                        <p> <label title="availabilty"> In stock :  </label> <span> 10 </span>  </p>
                         <h4> Description: </h4>
                         <p>
                             {{product.description}}
@@ -253,10 +252,13 @@
                                     <button class="btn plus"> <i class="icofont-plus"></i> </button>
                                     <button class="btn minus"> <i class="icofont-minus"></i>  </button>
                                     <span class="num">0</span>
+                                    <form id="myForm" method="POST">
+                                                                            {% csrf_token %}
                                     <input class="product_num" name="product_num" value="0" type="hidden">
                                 </div>
 
-                                <a href="#" class="btn-link add-to-cart"> <i class="icofont-cart"></i> Add to Cart</a>
+                                <a href="#" class="btn-link add-to-cart" onclick="document.getElementById('myForm').submit()"> <i class="icofont-cart"></i> Add to Cart</a>
+                                    </form>
                             </div>
                             
                         </div>

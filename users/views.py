@@ -175,7 +175,7 @@ def account_wishlist(request):
     total = 0
 
     for i in cart:
-        total += i.total
+        total += int(i.total)
        
     
     context = { 
@@ -189,19 +189,32 @@ def account_wishlist(request):
     return render(request, "users/account-wishlist.html",context=context)
 
 
+def remove_from_cart(request, pk):
+    cart_item = CartItem.objects.get(id=pk)
+    cart_item.delete()
+    return redirect('/account_wishlist')
+
+
+def order(request, pk):
+    return HttpResponse(pk)
+
+
 def index(request):
     
     cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
     total = 0
 
     for i in cart:
-        total += i.total
-       
+  
+        total += int(i.total)
     
+    iq = "{% static 'users/images/cart-ico.png'%}"
+    cart2=serializers.serialize("json",CartItem.objects.filter(user_id =  request.user.pk))
     context = { 
         "cart":cart,
         "total":total,
-        "items": len(cart)
+        "items": len(cart),
+        "cart2" : cart2
 
     }
     if request.POST.get('logout'):
@@ -210,8 +223,22 @@ def index(request):
         return redirect('/signin')
     return render(request, "users/index.html",context=context)
 
-def product_page(request,number):
+def product_page(request, number):
     product = Product.objects.get(id= number)
+    if request.method == "POST":
+        find_dup = CartItem.objects.filter(product=product).first()
+        if find_dup != None:
+            return HttpResponse("item already in the cart")
+        product_num = request.POST.get('product_num')
+        cart_item = CartItem.objects.create(
+            user = request.user,
+            product = product,
+            quantity = product_num,
+            price = product.price,
+            name = product.name,
+            total = product.price*int(product_num)
+        )
+        cart_item.save()
     context = { 
         "product": product
     }

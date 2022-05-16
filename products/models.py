@@ -19,6 +19,7 @@ class Product(models.Model):
     price = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image_path = models.CharField(max_length=100,blank=True, null=True)
     
     def __str__(self):
         return self.name

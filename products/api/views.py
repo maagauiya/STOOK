@@ -45,13 +45,15 @@ def create_product(request):
     description = data.get('description')
     image = data.get('image')
     price = data.get('price')
-    
+    image_path = data.get('image_path')
+    print("==================",image_path)
     product = Product.objects.create(
         user = user,
         name = name,
         description = description,
         image = image,
         price = price,
+        image_path = image_path
     )
     if category != None:
         category = find_or_create_category(category)
