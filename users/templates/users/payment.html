@@ -1,0 +1,73 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'users/css/payment.css'%}">
+
+</head>
+<body>
+
+<div class="container">
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+
+            
+
+            <div class="col">
+                
+                <h3 class="title">Оплата </h3>
+
+                <div  class="inputBox">
+                    <p>Карты которые принимаются:</p>
+                    <img src="{% static 'users/images/card_img.png'%}" alt="">
+                </div>
+
+
+                <!-- <div class="inputBox">
+                    <span>Имя на карте :</span>
+                    <input type="text" placeholder="Adliyar Akhmediyev">
+                </div> -->
+                <div class="inputBox">
+                    <label>Full Name</label>
+                    <input class="form-control form-control-lg" type="text" name="fullname" placeholder="Enter your full name">
+                  </div>
+
+                  <div class="inputBox">
+                    <label>Card Number</label>
+                    <input class="form-control form-control-lg" type="text" name="card_number" placeholder="1111 2222 3333 4444">
+                  </div>
+
+
+                  <div class="inputBox">
+                    <label>Expiration date</label>
+                    <input class="form-control form-control-lg" type="text" name="expdate" placeholder="12/24">
+                  </div>
+                  <div class="inputBox">
+                    <label>CVV</label>
+                    <input class="form-control form-control-lg" type="password" name="cvv" placeholder="090">
+                  </div>
+
+                
+                   
+
+            </div>
+    
+        </div>
+        <a href="{% url 'index'%}"><input type="button" value="Cancel" class="submit-btn" style="background: #6C757D;"></a>
+        
+        <input type="submit"  name="submit" value="Buy" class="submit-btn">
+        
+
+    </form>
+
+</div>    
+    
+</body>
+</html>

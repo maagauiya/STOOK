@@ -36,7 +36,8 @@ urlpatterns = [
     path('index/',index, name='index'),
     path('product/<int:number>',product_page,name='product_page'),
     path('order/<int:pk>', order, name="order"),
-    path('remove/<int:pk>', remove_from_cart, name="remove" )
+    path('remove/<int:pk>', remove_from_cart, name="remove" ),
+    path('payment/<int:pk>',payment, name='payment'),
 
 
 ]

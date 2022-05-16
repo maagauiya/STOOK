@@ -1,9 +1,13 @@
 
+from http import client
 import imp
 import datetime
 from itertools import product
 from math import prod
 from pydoc import cli
+from random import random
+from sqlite3 import Date
+from statistics import quantiles
 import time
 from django.core import serializers
 from django.http import HttpResponse
@@ -184,19 +188,22 @@ def account_wishlist(request):
         "items": len(cart)
 
     }
-    if request.POST.get('buy'):
-        return HttpResponse(request.POST.get('buy'))
+    # if request.POST.get('buy'):
+    #     item =  CartItem.objects.get(id = request.POST.get('buy') )
+    #     for i in item:
+    #         print(i)
     return render(request, "users/account-wishlist.html",context=context)
 
 
-def remove_from_cart(request, pk):
+def remove_from_cart(pk):
     cart_item = CartItem.objects.get(id=pk)
     cart_item.delete()
     return redirect('/account_wishlist')
 
 
 def order(request, pk):
-    return HttpResponse(pk)
+    return redirect(f"/payment/{pk}")
+
 
 
 def index(request):
@@ -243,4 +250,35 @@ def product_page(request, number):
         "product": product
     }
     return render(request, "users/product.html",context=context)
+
+def payment(request,pk):
+
+    cart_item = CartItem.objects.get(id = pk)
+    product1 = Product.objects.get(id = cart_item.product_id)
+    user = UserProfile.objects.get(user_id= request.user.pk)
+    user2 = UserProfile.objects.get(user_id= product1.user_id)
+    if request.POST.get("submit"):
+        order = Order.objects.create(
+            client = request.user,
+            supplier = request.user,
+            product = product1,
+            quantity = cart_item.quantity,
+            country = user.country,
+            region = user.region,
+            city = user.street,
+            address = user.street,
+            post_number = user.postal_cofde,
+            price = cart_item.price,
+            track_number = 213,
+            shipping_date = datetime.datetime(2022, 5, 17),
+            status = "In Process",
+            total = cart_item.total ,
+            name = product1.name
+        )
+        order.save()
+        remove_from_cart(pk)
+        print(request.POST.get("submit"))
+
+    return render(request, "users/payment.html")
+
 

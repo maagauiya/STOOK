@@ -1717,8 +1717,12 @@
                                 <thead>
                                     <tr>
                                         <th scope="col"> #Order </th>
+                                        <th scope="col"> Name </th>
                                         <th scope="col"> Date </th>
+                                        
                                         <th scope="col"> Ship To </th>
+                                        <th scope="col"> Price </th>
+                                        <th scope="col"> Quantity </th>
                                         <th scope="col"> Total </th>
                                         <th scope="col"> Status </th>
                                         <th scope="col">   </th>
@@ -1730,13 +1734,15 @@
                                     <tr>
                                         
                                         <th scope="row"> {{order.track_number}} </th>
+                                        <td> {{order.name}} </td>
                                         <td> {{order.shipping_date}} </td>
+                                        
                                         <td> {{order.city}},{{order.address}} </td>
                                                                               
                                         
-                                      
                                         <td> {{order.price}} KZT	 </td>
-               
+                                        <td> {{order.quantity}} KZT	 </td>
+                                        <td> {{order.total}} KZT	 </td>
 
                                         <td> {{order.status}} </td>
                                         <td> 

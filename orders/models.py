@@ -20,3 +20,5 @@ class Order(models.Model):
     order_date = models.DateTimeField(auto_now_add=True)
     shipping_date = models.DateTimeField(blank=True, null=True)
     status = models.CharField(max_length=50)
+    total = models.FloatField(blank=True, null=True)
+    name = models.CharField(max_length=50,blank=True, null=True)
