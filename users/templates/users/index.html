@@ -167,13 +167,16 @@
                                     <img src={{i.image_path}} id="image_id" alt="prod" class="img-fluid">
                                     
                                     <div class="data">
-                                        <a class="descr" href="#"> {{i.name}} </a>
+                                        <a class="descr" href="/product/{{i.product_id}}"> {{i.name}} </a>
                                         
                                         <h3>  {{i.total}} KZT </h3>
                                         <div class="item-footer">
                                             <p>  Qty :    <input type="text" value={{i.quantity}}> </p>
                                             <div class="actions">
-                                                <a data-toggle="modal" data-target="#delete-modal"> <i class="icofont-ui-delete"></i> </a>
+                                                <a href="{% url "order2" i.id %}" class="action-link delete-whish-item"> <i class="icofont-ui-delete"></i></a>
+
+                                                <!-- <a data-toggle="modal" data-target="#delete-modal"> <i class="icofont-ui-delete"></i> </a> -->
+                                              
                                                 <a href="#"> <i class="icofont-gear"></i> </a>
                                             </div>
                                         </div>
@@ -186,7 +189,7 @@
                             
                             </div>
                             <div class="bottom-info">
-                                <a class="btn-orange" href="{% url 'account_orders' %}"> View and edit cart </a>
+                                <a class="btn-orange" href="{% url 'account_wishlsit' %}"> View and edit cart </a>
                             </div>
                         </div>
                     </div>
@@ -1366,9 +1369,11 @@
                         <div class="item">
                             <div class="product-card">
                                 <div class="img-box">
-                                    <img src="{%static 'users/images/st-11.png'%}" alt="product" class="img-fluid">
+                                    <img src="{%static 'users/images/st-33.png'%}" alt="product" class="img-fluid">
                                 </div>
-                                <h3> Nvidia Geforce rtx 2080 </h3>
+                                <br>
+                                <a class="descr" href="/product/16"> PlayStation 5 </a>
+                         
                                 <ul>
                                     <li> <i class="icofont-star"></i> </li>
                                     <li> <i class="icofont-star"></i> </li>
@@ -1377,8 +1382,8 @@
                                     <li> <i class="icofont-star"></i> </li>
                                 </ul>
                                 <div class="price">
-                                    <span class="old"> 100000KZT </span>
-                                    <span class="new"> 85000KZT </span>
+                                    <soan class="old"> 250000KZT </soan>
+                                    <span class="new"> 230000KZT </span>
                                 </div>
                                 <a href="#" class="add-to-cart" data-toggle="modal" data-target="#cart-product-modal"> 
                                     <i class="icofont-opencart"></i>  Add To Cart 
@@ -1386,7 +1391,7 @@
                                 <span class="discount"> 26 % </span>
                                 <div class="overlay">
                                     <div class="actions">
-                                        <a class="show-product-modal"  data-toggle="modal" data-target="#product-modal"><i class="icofont-search"></i> </a>
+                                        <a class="show-product-modal" data-toggle="modal" data-target="#product-modal"> <i class="icofont-search"></i> </a>
                                         <a href="#"> <i class="icofont-refresh"></i> </a>
                                         <a href="#"> <i class="icofont-heart"></i> </a>
                                     </div>
@@ -1423,12 +1428,13 @@
                                 </div>
                             </div>
                         </div>
+                    
                         <div class="item">
                             <div class="product-card">
                                 <div class="img-box">
-                                    <img src="{%static 'users/images/st-33.png'%}" alt="product" class="img-fluid">
+                                    <img src="{%static 'users/images/st-11.png'%}" alt="product" class="img-fluid">
                                 </div>
-                                <h3> PlayStation 5 </h3>
+                                <h3> Nvidia1 Geforce rtx 2080 </h3>
                                 <ul>
                                     <li> <i class="icofont-star"></i> </li>
                                     <li> <i class="icofont-star"></i> </li>
@@ -1437,8 +1443,8 @@
                                     <li> <i class="icofont-star"></i> </li>
                                 </ul>
                                 <div class="price">
-                                    <soan class="old"> 250000KZT </soan>
-                                    <span class="new"> 230000KZT </span>
+                                    <span class="old"> 100000KZT </span>
+                                    <span class="new"> 85000KZT </span>
                                 </div>
                                 <a href="#" class="add-to-cart" data-toggle="modal" data-target="#cart-product-modal"> 
                                     <i class="icofont-opencart"></i>  Add To Cart 
@@ -1446,7 +1452,7 @@
                                 <span class="discount"> 26 % </span>
                                 <div class="overlay">
                                     <div class="actions">
-                                        <a class="show-product-modal" data-toggle="modal" data-target="#product-modal"> <i class="icofont-search"></i> </a>
+                                        <a class="show-product-modal"  data-toggle="modal" data-target="#product-modal"><i class="icofont-search"></i> </a>
                                         <a href="#"> <i class="icofont-refresh"></i> </a>
                                         <a href="#"> <i class="icofont-heart"></i> </a>
                                     </div>

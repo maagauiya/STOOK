@@ -205,6 +205,10 @@ def order(request, pk):
     return redirect(f"/payment/{pk}")
 
 
+def order2(request,pk):
+    CartItem.objects.filter(id = pk).delete()
+    return redirect("/index")
+
 
 def index(request):
     
@@ -231,23 +235,44 @@ def index(request):
     return render(request, "users/index.html",context=context)
 
 def product_page(request, number):
+    cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
+    total = 0
+
+    for i in cart:
+  
+        total += int(i.total)
+    
+    iq = "{% static 'users/images/cart-ico.png'%}"
+    cart2=serializers.serialize("json",CartItem.objects.filter(user_id =  request.user.pk))
     product = Product.objects.get(id= number)
-    if request.method == "POST":
+    if request.POST.get("myForm"):
+        return HttpResponse(request.POST.get("product_num"))
+        # print("PRODUCT=",request.POST.get("product_num"))
+        # print(request.POST.get("product_num"))
+    if request.POST:
+        print("8989089080980809809809")
         find_dup = CartItem.objects.filter(product=product).first()
         if find_dup != None:
             return HttpResponse("item already in the cart")
         product_num = request.POST.get('product_num')
+        
         cart_item = CartItem.objects.create(
             user = request.user,
             product = product,
             quantity = product_num,
             price = product.price,
             name = product.name,
-            total = product.price*int(product_num)
+            total = product.price*int(product_num),
+            image_path = product.image_path
+            
         )
+        
         cart_item.save()
     context = { 
-        "product": product
+        "product": product,"cart":cart,
+        "total":total,
+        "items": len(cart),
+        "cart2" : cart2
     }
     return render(request, "users/product.html",context=context)
 
