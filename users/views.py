@@ -245,6 +245,10 @@ def product_page(request, number):
     iq = "{% static 'users/images/cart-ico.png'%}"
     cart2=serializers.serialize("json",CartItem.objects.filter(user_id =  request.user.pk))
     product = Product.objects.get(id= number)
+
+    print("Image", product.image)
+
+
     if request.POST.get("myForm"):
         return HttpResponse(request.POST.get("product_num"))
         # print("PRODUCT=",request.POST.get("product_num"))
