@@ -1,0 +1,660 @@
+{%load static%}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'users/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/icofont.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/jquery-ui.min.css'%}">
+    <link rel="stylesheet" href="{% static 'users/css/style.css'%}">
+    <!-- <link rel="stylesheet" href="css/ar-style.css"> -->
+
+    
+    <title> STOOK  </title>
+</head>
+
+<body>
+
+    <div class="loader">
+        <img src="{% static 'users/images/spin.gif' %}" class="img-fluid">
+    </div>
+
+    <header class="site-header">
+
+      
+
+        <div class="middle-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="logo">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'users/images/Stook_logo.png' %}" alt="logo" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <form action="{% url "search"%}" method="POST">
+                            {% csrf_token %}
+                            <div class="search-box">
+                                <div class="filter-box">
+                                    <span id="result"> Search something </span>
+                                </div>
+                                <input type="text" name = "search_field" placeholder="for example iphone Nur-Sultan...">
+                                <button class="btn-search" type="submit"> <i class="icofont-search"></i> </button>
+                            </div>
+
+                            
+                        </form>
+                    </div>
+                    <div class="col-3">
+                        <div class="cart-header">
+                            <img src="{% static 'users/images/cart-ico.png'%}" alt="cart" class="img-fluid">
+                            <span class="cart-count"> {{items}} </span>
+                            <span> ITEM (S) </span>
+                            <a style="margin: 10px !important;" href="{% url 'profile' %}"> 
+                                <span class="result-data">  My Profile </span> 
+
+                            </a>
+                            <form id="logout" action="{% url "logout" %}" method="POST" style = "display:inline" >
+                                {% csrf_token %}
+                                <input type="hidden" value="obj" name="logout">
+                                <a id="sub" href="javascript:void(0);" onclick="document.getElementById('logout').submit();">Exit</a>
+                            </form>
+                        </div>
+                        <div class="cart-dropdown">
+                            <div class="top-info">
+                                <div class="counts"> {{items}} item  <span class="close"> <i class="icofont-close-line"></i> </span> </div>
+                                <p> <label> Cart Subtotal : </label> {{total}}KZT</p>
+                            </div>
+                            
+                            <div class="dropdown-items">
+                                {% for  i in cart %}
+                                <div class="item-box">
+                                    <img src="{{ MEDIA_URL }}{{ i.image_path }}" id="image_id" alt="prod" class="img-fluid">
+                                    
+                                    <div class="data">
+                                        <a class="descr" href="/product/{{i.product_id}}"> {{i.name}} </a>
+                                        
+                                        <h3>  {{i.total}} KZT </h3>
+                                        <div class="item-footer">
+                                            <p>  Qty :    <input type="text" value={{i.quantity}}> </p>
+                                            <div class="actions">
+                                                <a href="{% url "order2" i.id %}" class="action-link delete-whish-item"> <i class="icofont-ui-delete"></i></a>
+
+                                                <!-- <a data-toggle="modal" data-target="#delete-modal"> <i class="icofont-ui-delete"></i> </a> -->
+                                              
+                                                <a href="#"> <i class="icofont-gear"></i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                {% endfor %}
+   
+                            
+                            </div>
+                            <div class="bottom-info">
+                                <a class="btn-orange" href="{% url 'account_wishlsit' %}"> View and edit cart </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bootom-header">
+           
+                  
+        </div>
+
+    </header>   
+    
+   
+
+    <div class="mobile-side-menu">
+        <div class="overlay"></div>
+        <ul class="main-ul">
+            <li class="main-li">
+                <div class="colapse-btn">   Computers  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#">  All Computers </a>
+                    <div class="list"> 
+                        <a href="#"> Accessories </a>
+                        <ul>
+                            <li> <a href="#"> Storage </a> </li>
+                            <li> <a href="#"> Computer Accessories </a> </li>
+                            <li> <a href="#"> Printers & Accessories </a> </li>
+                            <li> <a href="#"> Network Components </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Televisions </a>
+                        <ul>
+                            <li> <a href="#"> 24 Inches & Below </a> </li>
+                            <li> <a href="#"> 33 - 42 Inches </a> </li>
+                            <li> <a href="#"> 43 - 54 Inches </a> </li>
+                            <li> <a href="#"> TVs by City </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Laptops </a>
+                        <ul>
+                            <li> <a href="#"> Gaming </a> </li>
+                            <li> <a href="#"> Netbooks </a> </li>
+                            <li> <a href="#"> Ultrabooks </a> </li>
+                            <li> <a href="#"> Macbooks </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Audio </a>
+                        <ul>
+                            <li> <a href="#"> Headphones & Headsets </a> </li>
+                            <li> <a href="#"> Portable Speakers </a> </li>
+                            <li> <a href="#"> Home Audio & Theater </a> </li>
+                            <li> <a href="#"> Audio Players </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn"> Smartphone  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Smartphone  </a>
+                    <div class="list"> 
+                        <a href="#"> Apple </a>
+                        <ul>
+                            <li> <a href="#"> Iphone 5  </a></li>
+                            <li> <a href="#"> Iphone 5s </a> </li>
+                            <li> <a href="#"> Iphone 6  </a> </li>
+                            <li> <a href="#"> Iphone 6s </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> SamSung </a>
+                        <ul>
+                            <li> <a href="#"> Galaxy S6 </a></li>
+                            <li> <a href="#"> Galaxy S7 </a></li>
+                            <li> <a href="#"> Galaxy Note 6 </a></li>
+                            <li> <a href="#"> Galaxy Note 7 </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Oppo  </a>
+                        <ul>
+                            <li> <a href="#"> Oppo f1s </a></li>
+                            <li> <a href="#"> Oppo neo 7 </a> </li>
+                            <li> <a href="#"> Oppo neo 9  </a></li>
+                            <li> <a href="#"> Oppo neo 3 </a></li>
+                        </ul>
+                    </div>
+                    <ldiv class="list"i> 
+                        <a href="#"> Xiaomi </a>
+                        <ul>
+                            <li> <a href="#"> Xiaomi mi5s </a></li>
+                            <li> <a href="#"> Xiaomi mi5s plus </a></li>
+                            <li> <a href="#"> Xiaomi mi5 </a></li>
+                            <li> <a href="#"> Xiaomi mi4 </a></li>
+                        </ul>
+                    </ldiv>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">   Electronics   <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Electronics    </a> 
+                    <div class="list"> 
+                        <a href="#"> Camera  </a>
+                        <ul>
+                            <li>  <a href="#"> Canon   </a> </li>
+                            <li>  <a href="#"> Sony   </a> </li>
+                            <li>  <a href="#"> Samsung   </a> </li>
+                            <li>  <a href="#"> Nikon   </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> HeadPhone </a>
+                        <ul>
+                            <li> <a href="#"> Samsung  </a> </li>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Sennheiser </a> </li>
+                            <li> <a href="#"> Sony  </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Phone </a>
+                        <ul>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Samsung  </a> </li>
+                            <li>  <a href="#"> Nokia  </a> </li>
+                            <li>  <a href="#"> Xiaomi </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#">  Audio </a>
+                        <ul>
+                            <li>  <a href="#"> Sennheiser </a> </li>
+                            <li>  <a href="#"> Samsung </a> </li>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Sennheiser  </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">  Jewelry    <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Jewelry  </a> 
+                    <div class="list">  
+                        <a href="#"> Necklaces </a>
+                        <ul>
+                            <li> <a href="#"> Pendants  </a></li>
+                            <li> <a href="#"> Beaded Necklaces  </a></li>
+                            <li> <a href="#"> Charm Necklaces  </a></li>
+                            <li> <a href="#"> Chokers </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Earrings </a>
+                        <ul>
+                            <li> <a href="#"> Hoop Earrings </a></li>
+                            <li> <a href="#"> Stud Earrings </a></li>
+                            <li> <a href="#"> Chandelier Earrings </a></li>
+                            <li> <a href="#"> Cluster Earrings </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Rings   </a>
+                        <ul>
+                            <li> <a href="#"> Wedding Engagement </a></li>
+                            <li> <a href="#"> Statement Rings  </a></li>
+                            <li> <a href="#"> Solitaire Rings </a></li>
+                            <li> <a href="#"> Stackable Rings</a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Bracelets  </a>
+                        <ul>
+                            <li> <a href="#"> Beaded Bracelets </a></li>
+                            <li> <a href="#"> Charm Bracelets </a></li>
+                            <li> <a href="#"> Bangles </a></li>
+                            <li> <a href="#"> Cuff Bracelets </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">  Sports  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Sports  </a> 
+                    <div class="list">  
+                        <a href="#"> Football </a>
+                        <ul>
+                            <li> <a href="#"> Nike   </a> </li>
+                            <li> <a href="#"> Puma   </a> </li>
+                            <li> <a href="#"> Adidas   </a> </li>
+                            <li> <a href="#"> Neo   </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Tennis </a>
+                        <ul>
+                            <li> <a href="#"> Balls  </a> </li>
+                            <li> <a href="#"> Racquet Bag  </a> </li>
+                            <li> <a href="#"> Drink bottle  </a> </li>
+                            <li> <a href="#"> Sunscreen </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Baseball  </a>
+                        <ul>
+                            <li> <a href="#"> Baseball  </a> </li>
+                            <li> <a href="#"> Batting cage  </a> </li>
+                            <li> <a href="#"> Batting Glove  </a> </li>
+                            <li> <a href="#"> Rosin Bag  </a> </li>
+                            <li> <a href="#"> Sports Equipment  </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Basketball </a>
+                        <ul>
+                            <li> <a href="#"> Balls </a>  </li>
+                            <li> <a href="#"> Racquet  </a> </li>
+                            <li> <a href="#"> Drink Bottle  </a> </li>
+                            <li> <a href="#"> Sunscreen  </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">   Fashion  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#">  All Fashion </a>  
+                    <div class="list"> 
+                        <a href="#"> Bags </a>
+                        <ul>
+                            <li> <a href="#"> Fashion </a> </li>
+                            <li> <a href="#"> Fashion Accessories </a> </li>
+                            <li> <a href="#"> Fashion & Accessories </a> </li>
+                            <li> <a href="#"> Fashion Components </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Clothing  </a>
+                        <ul>
+                            <li> <a href="#"> 24 Inches & Below </a> </li>
+                            <li> <a href="#"> 33 - 42 Inches </a> </li>
+                            <li> <a href="#"> 43 - 54 Inches </a> </li>
+                            <li> <a href="#"> TVs by City </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Bands </a>
+                        <ul>
+                            <li> <a href="#"> Gaming </a> </li>
+                            <li> <a href="#"> Netbooks </a> </li>
+                            <li> <a href="#"> Ultrabooks </a> </li>
+                            <li> <a href="#"> Macbooks </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Handbag </a>
+                        <ul>
+                            <li> <a href="#"> Headphones & Headsets </a> </li>
+                            <li> <a href="#"> Portable Speakers </a> </li>
+                            <li> <a href="#"> Home Audio & Theater </a> </li>
+                            <li> <a href="#"> Audio Players </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">   Computers  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#">  All Computers </a>
+                    <div class="list"> 
+                        <a href="#"> Accessories </a>
+                        <ul>
+                            <li> <a href="#"> Storage </a> </li>
+                            <li> <a href="#"> Computer Accessories </a> </li>
+                            <li> <a href="#"> Printers & Accessories </a> </li>
+                            <li> <a href="#"> Network Components </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Televisions </a>
+                        <ul>
+                            <li> <a href="#"> 24 Inches & Below </a> </li>
+                            <li> <a href="#"> 33 - 42 Inches </a> </li>
+                            <li> <a href="#"> 43 - 54 Inches </a> </li>
+                            <li> <a href="#"> TVs by City </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Laptops </a>
+                        <ul>
+                            <li> <a href="#"> Gaming </a> </li>
+                            <li> <a href="#"> Netbooks </a> </li>
+                            <li> <a href="#"> Ultrabooks </a> </li>
+                            <li> <a href="#"> Macbooks </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Audio </a>
+                        <ul>
+                            <li> <a href="#"> Headphones & Headsets </a></li>
+                            <li> <a href="#"> Portable Speakers </a></li>
+                            <li> <a href="#"> Home Audio & Theater </a></li>
+                            <li> <a href="#"> Audio Players </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn"> Smartphone  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Smartphone  </a>
+                    <div class="list"> 
+                        <a href="#"> Apple </a>
+                        <ul>
+                            <li> <a href="#"> Iphone 5  </a></li>
+                            <li> <a href="#"> Iphone 5s </a> </li>
+                            <li> <a href="#"> Iphone 6  </a> </li>
+                            <li> <a href="#"> Iphone 6s </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> SamSung </a>
+                        <ul>
+                            <li> <a href="#"> Galaxy S6 </a></li>
+                            <li> <a href="#"> Galaxy S7 </a></li>
+                            <li> <a href="#"> Galaxy Note 6 </a></li>
+                            <li> <a href="#"> Galaxy Note 7 </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Oppo  </a>
+                        <ul>
+                            <li> <a href="#"> Oppo f1s </a></li>
+                            <li> <a href="#"> Oppo neo 7 </a> </li>
+                            <li> <a href="#"> Oppo neo 9  </a></li>
+                            <li> <a href="#"> Oppo neo 3 </a></li>
+                        </ul>
+                    </div>
+                    <ldiv class="list"i> 
+                        <a href="#"> Xiaomi </a>
+                        <ul>
+                            <li> <a href="#"> Xiaomi mi5s </a></li>
+                            <li> <a href="#"> Xiaomi mi5s plus </a></li>
+                            <li> <a href="#"> Xiaomi mi5 </a></li>
+                            <li> <a href="#"> Xiaomi mi4 </a></li>
+                        </ul>
+                    </ldiv>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">   Electronics   <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Electronics    </a> 
+                    <div class="list"> 
+                        <a href="#"> Camera  </a>
+                        <ul>
+                            <li>  <a href="#"> Canon   </a> </li>
+                            <li>  <a href="#"> Sony   </a> </li>
+                            <li>  <a href="#"> Samsung   </a> </li>
+                            <li>  <a href="#"> Nikon   </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> HeadPhone </a>
+                        <ul>
+                            <li> <a href="#"> Samsung  </a> </li>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Sennheiser </a> </li>
+                            <li> <a href="#"> Sony  </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Phone </a>
+                        <ul>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Samsung  </a> </li>
+                            <li>  <a href="#"> Nokia  </a> </li>
+                            <li>  <a href="#"> Xiaomi </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#">  Audio </a>
+                        <ul>
+                            <li>  <a href="#"> Sennheiser </a> </li>
+                            <li>  <a href="#"> Samsung </a> </li>
+                            <li>  <a href="#"> Apple </a> </li>
+                            <li>  <a href="#"> Sennheiser  </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">  Jewelry    <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Jewelry  </a> 
+                    <div class="list">  
+                        <a href="#"> Necklaces </a>
+                        <ul>
+                            <li> <a href="#"> Pendants  </a></li>
+                            <li> <a href="#"> Beaded Necklaces  </a></li>
+                            <li> <a href="#"> Charm Necklaces  </a></li>
+                            <li> <a href="#"> Chokers </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Earrings </a>
+                        <ul>
+                            <li> <a href="#"> Hoop Earrings </a></li>
+                            <li> <a href="#"> Stud Earrings </a></li>
+                            <li> <a href="#"> Chandelier Earrings </a></li>
+                            <li> <a href="#"> Cluster Earrings </a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Rings   </a>
+                        <ul>
+                            <li> <a href="#"> Wedding Engagement </a></li>
+                            <li> <a href="#"> Statement Rings  </a></li>
+                            <li> <a href="#"> Solitaire Rings </a></li>
+                            <li> <a href="#"> Stackable Rings</a></li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Bracelets  </a>
+                        <ul>
+                            <li> <a href="#"> Beaded Bracelets </a></li>
+                            <li> <a href="#"> Charm Bracelets </a></li>
+                            <li> <a href="#"> Bangles </a></li>
+                            <li> <a href="#"> Cuff Bracelets </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">  Sports  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#"> All Sports  </a> 
+                    <div class="list">  
+                        <a href="#"> Football </a>
+                        <ul>
+                            <li> <a href="#"> Nike   </a> </li>
+                            <li> <a href="#"> Puma   </a> </li>
+                            <li> <a href="#"> Adidas   </a> </li>
+                            <li> <a href="#"> Neo   </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Tennis </a>
+                        <ul>
+                            <li> <a href="#"> Balls  </a> </li>
+                            <li> <a href="#"> Racquet Bag  </a> </li>
+                            <li> <a href="#"> Drink bottle  </a> </li>
+                            <li> <a href="#"> Sunscreen </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Baseball  </a>
+                        <ul>
+                            <li> <a href="#"> Baseball  </a> </li>
+                            <li> <a href="#"> Batting cage  </a> </li>
+                            <li> <a href="#"> Batting Glove  </a> </li>
+                            <li> <a href="#"> Rosin Bag  </a> </li>
+                            <li> <a href="#"> Sports Equipment  </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Basketball </a>
+                        <ul>
+                            <li> <a href="#"> Balls </a>  </li>
+                            <li> <a href="#"> Racquet  </a> </li>
+                            <li> <a href="#"> Drink Bottle  </a> </li>
+                            <li> <a href="#"> Sunscreen  </a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="main-li">
+                <div class="colapse-btn">   Fashion  <span class="icon"> <i class="icofont-thin-down"></i> </span> </div>
+                <div class="colapse-body">
+                    <a href="#">  All Fashion </a>  
+                    <div class="list"> 
+                        <a href="#"> Bags </a>
+                        <ul>
+                            <li> <a href="#"> Fashion </a> </li>
+                            <li> <a href="#"> Fashion Accessories </a> </li>
+                            <li> <a href="#"> Fashion & Accessories </a> </li>
+                            <li> <a href="#"> Fashion Components </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list">  
+                        <a href="#"> Clothing  </a>
+                        <ul>
+                            <li> <a href="#"> 24 Inches & Below </a> </li>
+                            <li> <a href="#"> 33 - 42 Inches </a> </li>
+                            <li> <a href="#"> 43 - 54 Inches </a> </li>
+                            <li> <a href="#"> TVs by City </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Bands </a>
+                        <ul>
+                            <li> <a href="#"> Gaming </a> </li>
+                            <li> <a href="#"> Netbooks </a> </li>
+                            <li> <a href="#"> Ultrabooks </a> </li>
+                            <li> <a href="#"> Macbooks </a> </li>
+                        </ul>
+                    </div>
+                    <div class="list"> 
+                        <a href="#"> Handbag </a>
+                        <ul>
+                            <li> <a href="#"> Headphones & Headsets </a></li>
+                            <li> <a href="#"> Portable Speakers </a></li>
+                            <li> <a href="#"> Home Audio & Theater </a></li>
+                            <li> <a href="#"> Audio Players </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="search-popup">
+        <div class="search-block">
+            <form action="">
+                <input type="text" placeholder="what are you looking for">
+                <button class="btn-search" type="submit"> <i class="icofont-search"></i> </button>
+            </form>
+        </div>
+        <div class="close-search"> <i class="icofont-close-line"></i> </div>
+    </div>
+
+    <!-- END BASIC HEADER -->
+
+    {%block main%}
+
+    {%endblock%}
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'users/js/jquery-3.2.1.min.js'%}"></script>
+    <script src="{% static 'users/js/popper.min.js'%}"></script>
+    <script src="{% static 'users/js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'users/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'users/js/jquery-ui.min.js'%}"></script>
+    <script src=" {% static 'users/js/edit.js'%}"></script>
+
+</body>
+
+</html>

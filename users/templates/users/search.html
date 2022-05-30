@@ -1,0 +1,61 @@
+{% extends 'users/_header.html' %}
+    {% block main %}    
+  {%load static%}
+    <!-- END BASIC HEADER -->
+
+<div class="products-section">
+    <div class="container">
+            <div class="head">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-5">
+                        <h2> Search </h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="tab_content active" id="tab_content_7">
+                    <div class="owl-carousel owl-theme tabcontent-owl">
+                      {% for item in search %}
+                        <div class="item">
+                            <div class="product-card">
+                                <div class="img-box">
+                                    <img src="{{ MEDIA_URL }}{{item.image.url}}" alt="product" class="img-fluid">
+                                </div>
+                                <br>
+                                 <a class="descr" href="{% url 'product_page' item.id %}"> <h3> {{ item.name }} </h3> </a>
+                                
+                                <ul>
+                                    <li> <i class="icofont-star"></i> </li>
+                                    <li> <i class="icofont-star"></i> </li>
+                                    <li> <i class="icofont-star"></i> </li>
+                                    <li> <i class="icofont-star"></i> </li>
+                                    <li> <i class="icofont-star"></i> </li>
+                                </ul>
+                                <div class="price">
+                                    <span class="new"> {{item.price}} </span>
+                                </div>
+                                <a href="#" class="add-to-cart" data-toggle="modal" data-target="#cart-product-modal"> 
+                                    <i class="icofont-opencart"></i>  Add To Cart 
+                                </a>
+                                <div class="overlay">
+                                    <div class="actions">
+                                        <a class="show-product-modal"  data-toggle="modal" data-target="#product-modal"> <i class="icofont-search"></i> </a>
+                                        <a href="#"> <i class="icofont-refresh"></i> </a>
+                                        <a href="#"> <i class="icofont-heart"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>   
+                </div>
+            
+            </div>
+        </div>
+    </div>
+
+
+         
+ 
+{%endblock%}

@@ -14,7 +14,7 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, blank=True, null=True, related_name='categories', on_delete=models.SET_NULL)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=50, blank=True, null=True)
+    description = models.CharField(max_length=500, blank=True, null=True)
     image = models.ImageField(blank=True, null=True)
     price = models.FloatField()
     created = models.DateTimeField(auto_now_add=True)

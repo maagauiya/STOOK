@@ -39,6 +39,8 @@ urlpatterns = [
     path('remove_cart/<int:pk>', order2, name="order2"),
     path('remove/<int:pk>', remove_from_cart, name="remove" ),
     path('payment/<int:pk>',payment, name='payment'),
+    path('search/', search, name = "search"),
+    path('logout/', logout_user, name='logout')
 
 
 ]

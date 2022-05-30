@@ -1,6 +1,8 @@
 
 from http import client
 import imp
+from multiprocessing import context
+from django.db.models import Q
 import datetime
 from itertools import product
 from math import prod
@@ -9,6 +11,7 @@ from random import random
 from sqlite3 import Date
 from statistics import quantiles
 import time
+from unicodedata import category
 from django.core import serializers
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
@@ -54,7 +57,7 @@ def signup(request):
    return render(request,'users/signup.html')
 
 
-
+@login_required(login_url='signin')
 def account_page(request):
  
     if request.POST.get('logout'):
@@ -76,6 +79,7 @@ def account_page(request):
         return render(request, "users/account.html")
 
 
+@login_required(login_url='signin')
 def account_info(request):
     if request.POST.get('logout'):
         logout(request)
@@ -108,9 +112,13 @@ def account_info(request):
 
     return render(request, "users/account-info.html",context)
 
+
+@login_required(login_url='signin')
 def account_address(request):
     user = UserProfile.objects.get(username=request.user.username)
     context = { 
+        "region" : user.region,
+        "country" : user.country,
         "street" : user.street,
         "city" :   user.city,
         "postal" : user.postal_cofde,
@@ -123,7 +131,7 @@ def account_address(request):
 
     return render(request, "users/account-address.html",context=context)
 
-
+@login_required(login_url='signin')
 def account_new(request):
     user = UserProfile.objects.get(username=request.user.username)
 
@@ -131,6 +139,8 @@ def account_new(request):
         logout(request)
         return redirect('/signin')
     if request.POST.get('savee'):
+        user.region = request.POST.get('region')
+        user.country = request.POST.get('country')
         user.city = request.POST.get('city')
         user.street = request.POST.get('street')
         user.postal_cofde = request.POST.get('postalcode')
@@ -138,6 +148,8 @@ def account_new(request):
         user.phone_number = request.POST.get('phone')
         user.save()
         context = { 
+        "region" : request.POST.get('region'),
+        "country" : request.POST.get('country'),
         "street" : request.POST.get('street'),
         "city" : request.POST.get('city'),
         "postal" : request.POST.get('postalcode'),
@@ -148,6 +160,8 @@ def account_new(request):
 
 
     context = { 
+        "region" : user.region,
+        "country" : user.country,
         "street" : user.street,
         "city" :   user.city,
         "postal" : user.postal_cofde,
@@ -157,6 +171,7 @@ def account_new(request):
     return render(request, "users/account-new-address.html",context=context)
 
 
+@login_required(login_url='signin')
 def account_orders(request):
     # order=serializers.serialize("json",Order.objects.filter(client_id = request.user.pk))
     # print("dsdsadas",order)
@@ -170,10 +185,12 @@ def account_orders(request):
     
     return render(request, "users/account-orders.html",context=context)
 
+@login_required(login_url='signin')
 def account_news(request):
    
     return render(request, "users/account-news.html")
 
+@login_required(login_url='signin')
 def account_wishlist(request):
     cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
     total = 0
@@ -194,46 +211,51 @@ def account_wishlist(request):
     #         print(i)
     return render(request, "users/account-wishlist.html",context=context)
 
-
-def remove_from_cart(pk):
+@login_required(login_url='signin')
+def remove_from_cart(request, pk):
     cart_item = CartItem.objects.get(id=pk)
     cart_item.delete()
     return redirect('/account_wishlist')
 
-
+@login_required(login_url='signin')
 def order(request, pk):
     return redirect(f"/payment/{pk}")
 
-
+@login_required(login_url='signin')
 def order2(request,pk):
     CartItem.objects.filter(id = pk).delete()
     return redirect("/index")
 
-
+@login_required(login_url='signin')
 def index(request):
     
     cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
     total = 0
+    
+    different_products = Product.objects.filter().order_by('?')[:10]
+    technologies = Product.objects.filter(category="technologies")
+    furniture = Product.objects.filter(category="furniture")
 
     for i in cart:
   
         total += int(i.total)
     
     iq = "{% static 'users/images/cart-ico.png'%}"
-    cart2=serializers.serialize("json",CartItem.objects.filter(user_id =  request.user.pk))
     context = { 
         "cart":cart,
         "total":total,
         "items": len(cart),
-        "cart2" : cart2
-
+        "different": different_products,
+        "technologies": technologies,
+        "furniture": furniture
     }
     if request.POST.get('logout'):
-        print("ksdjflkdjlkfjsdlkjflksd")
         logout(request)
         return redirect('/signin')
     return render(request, "users/index.html",context=context)
 
+
+@login_required(login_url='signin')
 def product_page(request, number):
     cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
     total = 0
@@ -259,6 +281,7 @@ def product_page(request, number):
         if find_dup != None:
             return HttpResponse("item already in the cart")
         product_num = request.POST.get('product_num')
+        print(request.POST)
         
         cart_item = CartItem.objects.create(
             user = request.user,
@@ -267,7 +290,7 @@ def product_page(request, number):
             price = product.price,
             name = product.name,
             total = product.price*int(product_num),
-            image_path = product.image_path
+            image_path = product.image.url
             
         )
         
@@ -280,6 +303,8 @@ def product_page(request, number):
     }
     return render(request, "users/product.html",context=context)
 
+
+@login_required(login_url='signin')
 def payment(request,pk):
 
     cart_item = CartItem.objects.get(id = pk)
@@ -305,9 +330,37 @@ def payment(request,pk):
             name = product1.name
         )
         order.save()
-        remove_from_cart(pk)
-        print(request.POST.get("submit"))
+        remove_from_cart(request, pk)
+        return redirect("account_wishlsit")
 
     return render(request, "users/payment.html")
 
+
+
+@login_required(login_url='signin')
+def search(request):
+    q = request.POST.get("search_field")
+    products = Product.objects.filter(Q(name__icontains=q))
+    cart = CartItem.objects.filter(user_id =  request.user.pk) #1,2
+    total = 0
+
+    for i in cart:
+  
+        total += int(i.total)
+    
+    context = { 
+        "cart":cart,
+        "total":total,
+        "items": len(cart),
+        "search": products
+    }
+    if request.POST.get('logout'):
+        logout(request)
+        return redirect('/signin')
+    return render(request, "users/search.html", context)
+
+@login_required(login_url='signin')
+def logout_user(request):
+    logout(request)
+    return redirect("signin")
 
